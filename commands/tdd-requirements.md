@@ -39,7 +39,7 @@ TDD開発を始めます。以下の機能について要件を整理してく�
 
 整理後、以下を実行してください：
 
-1. 要件定義書をdoc/implementation/{feature_name}-requirements.mdに保存（既存ファイルがある場合は追記）
+1. 要件定義書をdocs/implementation/{feature_name}-requirements.mdに保存（既存ファイルがある場合は追記）
 2. TODOステータスを更新（要件定義完了をマーク）
 3. **品質判定**: 要件の品質を以下の基準で判定
    - 要件が明確で曖昧さがない

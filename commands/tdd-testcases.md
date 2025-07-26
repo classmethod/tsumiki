@@ -139,7 +139,7 @@ afterEach(() => {
 
 すべて洗い出したら以下を実行してください：
 
-1. テストケース一覧をdoc/implementation/{feature_name}-testcases.mdに保存（既存ファイルがある場合は追記）
+1. テストケース一覧をdocs/implementation/{feature_name}-testcases.mdに保存（既存ファイルがある場合は追記）
 2. TODOステータスを更新（テストケース洗い出し完了をマーク）
 3. **品質判定**: テストケースの品質を以下の基準で判定
    - テストケース分類: 正常系・異常系・境界値が網羅されている

@@ -4,18 +4,18 @@
 設計文書に基づいて実装タスクを分割し、依存関係を考慮した適切な順序で整理する。各タスクには実装詳細、テスト要件、UI/UX要件を含める。
 
 ## 前提条件
-- `/projects/ai/test18/docs/design/{要件名}/` に設計文書が存在する
+- `docs/design/{要件名}/` に設計文書が存在する
 - 設計がユーザによって承認されている（または承認が省略されている）
-- `/projects/ai/test18/docs/tasks/` ディレクトリが存在する（なければ作成）
+- `docs/tasks/` ディレクトリが存在する（なければ作成）
 
 ## 実行内容
 
 1. **設計文書の分析**
-   - `/projects/ai/test18/docs/design/{要件名}/architecture.md` を確認
-   - `/projects/ai/test18/docs/design/{要件名}/database-schema.sql` を確認
-   - `/projects/ai/test18/docs/design/{要件名}/api-endpoints.md` を確認
-   - `/projects/ai/test18/docs/design/{要件名}/interfaces.ts` を確認
-   - `/projects/ai/test18/docs/design/{要件名}/dataflow.md` を確認
+   - `docs/design/{要件名}/architecture.md` を確認
+   - `docs/design/{要件名}/database-schema.sql` を確認
+   - `docs/design/{要件名}/api-endpoints.md` を確認
+   - `docs/design/{要件名}/interfaces.ts` を確認
+   - `docs/design/{要件名}/dataflow.md` を確認
 
 2. **タスクの洗い出し**
    - 基盤タスク（DB設定、環境構築など）
@@ -49,7 +49,7 @@
    - 並行実行可能なタスクをグループ化
 
 6. **ファイルの作成**
-   - `/projects/ai/test18/docs/tasks/{要件名}-tasks.md` として保存
+   - `docs/tasks/{要件名}-tasks.md` として保存
    - 各タスクにチェックボックスを追加してタスクの完了状況を追跡可能にする
 
 ## 出力フォーマット例

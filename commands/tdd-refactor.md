@@ -3,7 +3,7 @@
 TDDのRefactorフェーズを実行します。
 
 ## 事前確認
-まず、TDDメモファイル `doc/implementation/{test_case_name}-memo.md` を確認してください：
+まず、TDDメモファイル `docs/implementation/{test_case_name}-memo.md` を確認してください：
 - **Greenフェーズの内容確認**: 実装された最小コード、テスト結果、特定された課題・改善点を把握
 - **関連ファイル確認**: メモファイル内の関連ファイル情報を参照し、要件定義との整合性を確認
 - **リファクタ対象の特定**: Greenフェーズで記録された改善すべき点を確認
@@ -204,11 +204,11 @@ function add(firstNumber, secondNumber) {
 
 リファクタリング完了後、以下を実行してください：
 
-1. **メモファイル最終更新**: doc/implementation/{test_case_name}-memo.mdファイルのRefactorフェーズセクションと概要を更新
+1. **メモファイル最終更新**: docs/implementation/{test_case_name}-memo.mdファイルのRefactorフェーズセクションと概要を更新
    - 改善内容、セキュリティレビュー結果、パフォーマンスレビュー結果を記録
    - 最終コード、品質評価を記録
    - 概要セクションの現在のフェーズを「完了」に更新
-2. リファクタリング内容と設計改善をdoc/implementation/{feature_name}-refactor-phase.mdに保存（既存ファイルがある場合は追記）
+2. リファクタリング内容と設計改善をdocs/implementation/{feature_name}-refactor-phase.mdに保存（既存ファイルがある場合は追記）
 3. TODOステータスを更新（Refactorフェーズ完了をマーク）
 4. **品質判定**: リファクタリング成果の品質を以下の基準で判定
    - テスト結果: 全てのテストが引き続き成功

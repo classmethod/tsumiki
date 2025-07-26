@@ -3,7 +3,7 @@
 TDDのGreenフェーズを実行します。
 
 ## 事前確認
-まず、TDDメモファイル `doc/implementation/{test_case_name}-memo.md` を確認してください：
+まず、TDDメモファイル `docs/implementation/{test_case_name}-memo.md` を確認してください：
 - **Redフェーズの内容確認**: 作成されたテストケース、期待される失敗、実装要求事項を把握
 - **関連ファイル確認**: メモファイル内の関連ファイル情報を参照し、要件定義やテストケース定義を確認
 - **テストコードの確認**: 実装すべき関数・メソッドの仕様を理解
@@ -144,10 +144,10 @@ function {{function_name}}(input) {
 
 実装完了後、以下を実行してください：
 
-1. **メモファイル更新**: doc/implementation/{test_case_name}-memo.mdファイルのGreenフェーズセクションを更新
+1. **メモファイル更新**: docs/implementation/{test_case_name}-memo.mdファイルのGreenフェーズセクションを更新
    - 実装方針、実装コード、テスト結果、課題・改善点を記録
    - 次のRefactorフェーズで参照できるよう詳細に記録
-2. 実装コードと設計内容をdoc/implementation/{feature_name}-green-phase.mdに保存（既存ファイルがある場合は追記）
+2. 実装コードと設計内容をdocs/implementation/{feature_name}-green-phase.mdに保存（既存ファイルがある場合は追記）
 3. TODOステータスを更新（Greenフェーズ完了をマーク）
 4. **自動遷移判定**: 以下の条件を満たす場合は自動で `/tdd-refactor` を実行
    - 全てのテストが成功していることを確認済み

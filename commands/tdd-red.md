@@ -3,7 +3,7 @@
 TDDのRedフェーズを実行します。
 
 ## 事前確認
-まず、既存のTDDメモファイル `doc/implementation/{test_case_name}-memo.md` が存在するかを確認してください：
+まず、既存のTDDメモファイル `docs/implementation/{test_case_name}-memo.md` が存在するかを確認してください：
 - **メモファイルが存在する場合**: 既存の内容を確認し、関連ファイル情報を参照してRedフェーズの続きまたは更新として作業を進める
 - **メモファイルが存在しない場合**: 新規のTDD開発として進める
 
@@ -16,8 +16,8 @@ TDDのRedフェーズを実行します。
 
 ### 関連ファイルの確認
 以下のファイルが存在する場合は、内容を確認してテスト作成に活用してください：
-- `doc/implementation/{feature_name}-requirements.md`: 機能要件と仕様
-- `doc/implementation/{feature_name}-testcases.md`: 予定されているテストケース一覧
+- `docs/implementation/{feature_name}-requirements.md`: 機能要件と仕様
+- `docs/implementation/{feature_name}-testcases.md`: 予定されているテストケース一覧
 
 ## 対象テストケース
 **【対象テストケース】**: {{test_case_name}}
@@ -134,10 +134,10 @@ describe('{{feature_name}}', () => {
 
 テストコード作成後、以下を実行してください：
 
-1. **メモファイル作成・更新**: doc/implementation/{test_case_name}-memo.mdファイルにRedフェーズの内容を作成または追記
+1. **メモファイル作成・更新**: docs/implementation/{test_case_name}-memo.mdファイルにRedフェーズの内容を作成または追記
    - 既存のメモファイルがある場合は、Redフェーズセクションを更新
    - メモファイルが存在しない場合は新規作成
-2. テストコードの設計内容をdoc/implementation/{feature_name}-red-phase.mdに保存（既存ファイルがある場合は追記）
+2. テストコードの設計内容をdocs/implementation/{feature_name}-red-phase.mdに保存（既存ファイルがある場合は追記）
 3. TODOステータスを更新（Redフェーズ完了をマーク）
 4. **品質判定**: テストコードの品質を以下の基準で判定
    - テスト実行: 実行可能で失敗することを確認済み
@@ -148,7 +148,7 @@ describe('{{feature_name}}', () => {
    - 「次のお勧めステップ: `/tdd-green` でGreenフェーズ（最小実装）を開始します。」
 
 ## TDDメモファイル形式
-doc/implementation/{test_case_name}-memo.mdファイルの形式：
+docs/implementation/{test_case_name}-memo.mdファイルの形式：
 
 ```markdown
 # TDD開発メモ: {test_case_name}
@@ -159,8 +159,8 @@ doc/implementation/{test_case_name}-memo.mdファイルの形式：
 - 現在のフェーズ: [Red/Green/Refactor]
 
 ## 関連ファイル
-- 要件定義: `doc/implementation/{feature_name}-requirements.md`
-- テストケース定義: `doc/implementation/{feature_name}-testcases.md`
+- 要件定義: `docs/implementation/{feature_name}-requirements.md`
+- テストケース定義: `docs/implementation/{feature_name}-testcases.md`
 - 実装ファイル: `[実装ファイルのパス]`
 - テストファイル: `[テストファイルのパス]`
 
