@@ -1,4 +1,4 @@
-# kiro-implement
+# kairo-implement
 
 ## 目的
 分割されたタスクを順番に、またはユーザが指定したタスクを実装する。既存のTDDコマンドを活用して品質の高い実装を行う。
@@ -108,16 +108,16 @@ flowchart TD
 
 ```bash
 # 全タスクを順番に実装
-$ claude code kiro-implement --all
+$ claude code kairo-implement --all
 
 # 特定のタスクを実装
-$ claude code kiro-implement --task TASK-101
+$ claude code kairo-implement --task TASK-101
 
 # 並行実行可能なタスクを一覧表示
-$ claude code kiro-implement --list-parallel
+$ claude code kairo-implement --list-parallel
 
 # 現在の進捗を表示
-$ claude code kiro-implement --status
+$ claude code kairo-implement --status
 ```
 
 ## 実装タイプ判定基準

@@ -1,4 +1,4 @@
-# kiro-requirements
+# kairo-requirements
 
 ## 目的
 
