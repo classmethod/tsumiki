@@ -32,7 +32,7 @@ export async function getTarget(
  */
 export function getTargetDir(target: string): string {
   const currentDir = process.cwd();
-  
+
   switch (target) {
     case "claude":
       return path.join(currentDir, ".claude", "commands");
