@@ -10,7 +10,40 @@ Tsumikiを使用するには、次のnpxコマンドでインストールして�
 npx tsumiki install
 ```
 
-このコマンドを実行すると、`.claude/commands/` にTsumikiのClaude Codeスラッシュコマンドがインストールされます。
+デフォルトでは、`.claude/commands/` にTsumikiのClaude Codeスラッシュコマンドがインストールされます。
+Qwen3 Coder を使用する場合は、以下のように `--target` オプションを指定してください：
+
+```bash
+npx tsumiki install --target qwen
+```
+
+または、設定ファイル (`.tsumikirc`) を使用してデフォルトのターゲットを指定することもできます。
+
+## アンインストール
+
+Tsumikiをアンインストールするには、次のコマンドを使用してください：
+
+```bash
+npx tsumiki uninstall
+```
+
+Qwen3 Coder環境からアンインストールする場合は、`--target` オプションを指定してください：
+
+```bash
+npx tsumiki uninstall --target qwen
+```
+
+設定ファイル（`.tsumikirc`）でターゲットを指定している場合は、オプションなしでも適切な環境からアンインストールされます。
+
+### 設定ファイル
+
+プロジェクトのルートディレクトリに `.tsumikirc` ファイルを作成し、以下のように記述することで、
+コマンドラインオプションを指定しなくても、指定したCoder環境にインストールできます。
+
+例: `.tsumikirc`
+```toml
+target = "qwen"
+```
 
 ## 概要
 
