@@ -40,12 +40,15 @@
     "dist"
   ],
   "scripts": {
-    "build": "rm -rf dist && mkdir -p dist/commands dist/agents && cp ./commands/*.md ./commands/*.sh dist/commands/ 2>/dev/null || true && cp ./agents/*.md dist/agents/ 2>/dev/null || true && tsup",
+    "build": "rimraf dist && mkdirp dist/commands && copyfiles -u 1 commands/*.md commands/*.sh dist/commands/ && tsup",
     "build:run": "pnpm build && node dist/cli.js",
     "check": "biome check src",
     "fix": "biome check src --write",
     "prepare": "simple-git-hooks",
     "secretlint": "secretlint --secretlintignore .gitignore **/*",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "typecheck": "tsgo --noEmit"
   },
   "simple-git-hooks": {
@@ -62,11 +65,17 @@
     "@secretlint/secretlint-rule-preset-recommend": "10.2.1",
     "@tsconfig/node24": "24.0.1",
     "@types/fs-extra": "11.0.4",
+    "@types/jest": "30.0.0",
     "@types/node": "24.1.0",
     "@types/react": "19.1.9",
     "@typescript/native-preview": "7.0.0-dev.20250729.2",
+    "copyfiles": "2.4.1",
+    "jest": "30.0.5",
+    "mkdirp": "3.0.1",
+    "rimraf": "6.0.1",
     "secretlint": "10.2.1",
     "simple-git-hooks": "2.13.0",
+    "ts-jest": "29.4.1",
     "tsup": "8.5.0",
     "tsx": "4.20.3",
     "typescript": "5.8.3"
