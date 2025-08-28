@@ -39,9 +39,7 @@ const GitignoreComponent: React.FC = () => {
         );
 
         // 具体的なファイルパスをルールとして作成
-        const rulesToAdd = targetFiles.map(
-          (file) => `.claude/commands/${file}`,
-        );
+        const rulesToAdd = targetFiles.map((file) => `.qwen/commands/${file}`);
 
         let gitignoreContent = "";
         let gitignoreExists = false;
@@ -162,7 +160,7 @@ const GitignoreComponent: React.FC = () => {
         <Text>既存のルール:</Text>
         {skippedRules.map((rule) => (
           <Text key={rule} color="gray">
-            • {rule}
+            {`  • ${rule}`}
           </Text>
         ))}
         <Newline />
@@ -181,7 +179,7 @@ const GitignoreComponent: React.FC = () => {
             <Text>追加されたルール ({addedRules.length}個):</Text>
             {addedRules.map((rule) => (
               <Text key={rule} color="green">
-                • {rule}
+                {`  • ${rule}`}
               </Text>
             ))}
           </>
@@ -191,7 +189,7 @@ const GitignoreComponent: React.FC = () => {
             <Text>既存のルール ({skippedRules.length}個):</Text>
             {skippedRules.map((rule) => (
               <Text key={rule} color="gray">
-                • {rule}
+                {`  • ${rule}`}
               </Text>
             ))}
           </>

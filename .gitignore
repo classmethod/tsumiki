@@ -18,6 +18,19 @@ Thumbs.db
 # Dependencies
 node_modules/
 .pnpm-store/
+
+# Reference folder
+tsumiki-qwen3-coder-support/
+
+# Test files (for verification only)
+**/__tests__/
+**/__test__/
+*.test.ts
+*.test.tsx
+*.test.js
+*.test.jsx
+test-*.md
+tdd-test-plan.md
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
