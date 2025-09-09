@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 import fs from "fs-extra";
 import { Box, Newline, render, Text } from "ink";
 import React, { useEffect, useState } from "react";
+import { getTarget, getTargetDir } from "../utils/target.js"; // Import the new utility
 
 type UninstallStatus =
   | "starting"
@@ -12,21 +13,30 @@ type UninstallStatus =
   | "error"
   | "not_found";
 
-const UninstallComponent: React.FC = () => {
+interface UninstallComponentProps {
+  target?: string; // Receive target as a prop
+}
+
+const UninstallComponent: React.FC<UninstallComponentProps> = ({
+  target: cliTarget,
+}) => {
+  // Accept target prop
   const [status, setStatus] = useState<UninstallStatus>("starting");
   const [removedFiles, setRemovedFiles] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [resolvedTarget, setResolvedTarget] = useState<string>(""); // State to hold the resolved target
 
   useEffect(() => {
     const performUninstall = async (): Promise<void> => {
       try {
+        // Resolve the target (cliTarget -> config -> default)
+        const target = await getTarget(cliTarget);
+        setResolvedTarget(target); // Store the resolved target for display
+        const targetDir = getTargetDir(target); // Get the target directory path
+
         setStatus("checking");
 
-        // 現在のディレクトリを取得
-        const currentDir = process.cwd();
-        const targetDir = path.join(currentDir, ".claude", "commands");
-
-        // .claude/commandsディレクトリが存在するかチェック
+        // ターゲットディレクトリが存在するかチェック
         const dirExists = await fs.pathExists(targetDir);
         if (!dirExists) {
           setStatus("not_found");
@@ -50,7 +60,7 @@ const UninstallComponent: React.FC = () => {
 
         setStatus("removing");
 
-        // .claude/commands内のファイルをチェックして、tsumiki由来のファイルのみ削除
+        // ターゲットディレクトリ内のファイルをチェックして、tsumiki由来のファイルのみ削除
         const installedFiles = await fs.readdir(targetDir);
         const removedFilesList: string[] = [];
 
@@ -62,16 +72,16 @@ const UninstallComponent: React.FC = () => {
           }
         }
 
-        // 削除後に.claude/commandsディレクトリが空になったかチェック
+        // 削除後にターゲットディレクトリが空になったかチェック
         const remainingFiles = await fs.readdir(targetDir);
         if (remainingFiles.length === 0) {
           // 空のディレクトリを削除
           await fs.rmdir(targetDir);
-          // .claudeディレクトリも空の場合は削除
-          const claudeDir = path.dirname(targetDir);
-          const claudeFiles = await fs.readdir(claudeDir);
-          if (claudeFiles.length === 0) {
-            await fs.rmdir(claudeDir);
+          // 親ディレクトリ (.claude or .qwen) も空の場合は削除
+          const parentDir = path.dirname(targetDir);
+          const parentFiles = await fs.readdir(parentDir);
+          if (parentFiles.length === 0) {
+            await fs.rmdir(parentDir);
           }
         }
 
@@ -95,7 +105,7 @@ const UninstallComponent: React.FC = () => {
     };
 
     performUninstall();
-  }, []);
+  }, [cliTarget]); // Add cliTarget as a dependency
 
   if (status === "starting") {
     return (
@@ -125,7 +135,8 @@ const UninstallComponent: React.FC = () => {
     return (
       <Box flexDirection="column">
         <Text color="yellow">
-          ⚠️ .claude/commands ディレクトリが見つかりません
+          ⚠️ {getTargetDir(resolvedTarget).replace(process.cwd(), "").slice(1)}{" "}
+          ディレクトリが見つかりません
         </Text>
         <Text color="gray">Tsumikiはインストールされていないようです。</Text>
       </Box>
@@ -157,16 +168,23 @@ const UninstallComponent: React.FC = () => {
       <Box flexDirection="column">
         <Text color="green">✅ アンインストールが完了しました!</Text>
         <Newline />
+        <Text>ターゲット: {resolvedTarget}</Text>
+        <Newline />
         <Text>削除されたファイル ({removedFiles.length}個):</Text>
         {removedFiles.map((file) => (
           <Text key={file} color="gray">
-            {" "}
-            • {file}
+            {"  • " + file}
           </Text>
         ))}
         <Newline />
         <Text color="cyan">
-          TsumikiのClaude Codeコマンドテンプレートが削除されました。
+          Tsumikiの
+          {resolvedTarget === "claude"
+            ? "Claude Code"
+            : resolvedTarget === "qwen"
+              ? "Qwen Code"
+              : resolvedTarget}
+          コマンドテンプレートが削除されました。
         </Text>
       </Box>
     );
@@ -175,6 +193,7 @@ const UninstallComponent: React.FC = () => {
   return null;
 };
 
-export const uninstallCommand = (): void => {
-  render(React.createElement(UninstallComponent));
+// Modify the uninstallCommand function to accept the target and pass it to the component
+export const uninstallCommand = (target?: string): void => {
+  render(React.createElement(UninstallComponent, { target }));
 };

@@ -9,18 +9,26 @@ const program = new Command();
 
 program
   .name("tsumiki")
-  .description("CLI tool for installing Claude Code command templates")
+  .description(
+    "CLI tool for installing Tsumiki commands for various Coder environments",
+  )
   .version("1.0.0");
 
 program
   .command("install")
-  .description("Install Claude Code command templates to .claude/commands/")
-  .action(installCommand);
+  .description(
+    "Install Tsumiki command templates to the specified Coder environment",
+  )
+  .option("-t, --target <coder>", "Target Coder environment (claude or qwen)")
+  .action((options) => installCommand(options.target));
 
 program
   .command("uninstall")
-  .description("Uninstall Claude Code command templates from .claude/commands/")
-  .action(uninstallCommand);
+  .description(
+    "Uninstall Tsumiki command templates from the specified Coder environment",
+  )
+  .option("-t, --target <coder>", "Target Coder environment (claude or qwen)")
+  .action((options) => uninstallCommand(options.target));
 
 program
   .command("gitignore")
