@@ -31,3 +31,6 @@ dist/
 
 # Others
 tmp/
+
+# Version management
+.tool-versions
