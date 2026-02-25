@@ -7,14 +7,14 @@
   },
   "metadata": {
     "description": "AI-driven development toolkit for TDD and SDD workflows, providing comprehensive command templates and agents to enhance developer productivity with Claude Code",
-    "version": "1.1.1"
+    "version": "1.2.0"
   },
   "plugins": [
     {
       "name": "tsumiki",
       "source": "./",
       "description": "AI-driven development toolkit for TDD and SDD workflows, providing comprehensive command templates and agents to enhance developer productivity with Claude Code",
-      "version": "1.1.1",
+      "version": "1.2.0",
       "author": {
         "name": "makoto kuroeda",
         "email": "kuroeda.makoto@classmethod.jp"
