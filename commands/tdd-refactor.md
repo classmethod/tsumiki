@@ -28,33 +28,17 @@ Refactorフェーズファイル=./docs/implements/{要件名}/{{task_id}}/{feat
 
 開発コンテキストの準備を実行する:
 
-1. **既存の実装ドキュメントの確認**
-   - `./docs/implements/{要件名}/{{task_id}}/` ディレクトリ内の全てのMDファイルを確認
-   - 特に以下のファイルを優先的に読み込み：
-     - `note.md` - タスクノート（技術スタック、開発ルール、関連実装）
-     - `{feature_name}-requirements.md` - 要件定義
-     - `{feature_name}-testcases.md` - テストケース定義
-     - `{feature_name}-green-phase.md` - Greenフェーズの実装記録
-     - `{feature_name}-refactor-phase.md` - 既存のRefactorフェーズ記録
-     - `{feature_name}-memo.md` - 開発履歴メモ
-     - その他の関連MDファイル
-   - これらのファイルから既存の実装状況、設計判断、注意事項を把握
+1. **タスクノートの読み込み（唯一のコンテキストソース）**
+   - `./docs/implements/{要件名}/{{task_id}}/note.md` を読み込み
+   - 存在しない場合: @task で `/tsumiki:tdd-tasknote {要件名} {{task_id}}` を実行して生成
+   - note.mdには技術スタック、開発ルール、関連実装、設計文書、テスト関連情報、注意事項が集約済み
 
-2. **追加ルールの読み込み**
-   - `AGENTS.md` ファイルが存在する場合は読み込み
-   - `./docs/rule` ディレクトリが存在する場合は読み込み
-   - `./docs/rule/tdd` ディレクトリが存在する場合は読み込み
-   - `./docs/rule/tdd/refactor` ディレクトリが存在する場合は読み込み
-   - 各ディレクトリ内のすべてのファイルを読み込み、追加ルールとして適用
-
-3. **Task tool (subagent_type: Explore, thoroughness: quick) を使用してリファクタリング関連情報を探索**
-   - 既存のコードスタイルやベストプラクティスを探索
-   - プロジェクト全体のアーキテクチャパターンを特定
-   - 再利用可能なユーティリティ関数やコンポーネントを確認
-
-4. **関連する外部ファイルを直接読み込み**
-   - 関連する設計文書やタスクファイルも必要に応じて読み込み
-   - プロジェクト全体の設計文書、アーキテクチャ文書など
+2. **直前フェーズの出力を読み込み**
+   - `./docs/implements/{要件名}/{{task_id}}/{feature_name}-requirements.md` - 要件定義
+   - `./docs/implements/{要件名}/{{task_id}}/{feature_name}-testcases.md` - テストケース定義
+   - `./docs/implements/{要件名}/{{task_id}}/{feature_name}-green-phase.md` - Greenフェーズの実装記録
+   - `./docs/implements/{要件名}/{{task_id}}/{feature_name}-refactor-phase.md` - 既存のRefactorフェーズ記録（存在する場合）
+   - `./docs/implements/{要件名}/{{task_id}}/{feature_name}-memo.md` - 開発履歴メモ（存在する場合）
 
 読み込み完了後、step3 を実行する
 

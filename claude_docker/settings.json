@@ -1,0 +1,102 @@
+{
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "excludedCommands": ["docker", "docker-compose", "git"],
+    "allowUnsandboxedCommands": true,
+    "filesystem": {
+      "write": {
+        "allowOnly": [
+          "/tmp/claude",
+          "/private/tmp/claude",
+          "/private/tmp/zsh*"
+        ]
+      }
+    },
+    "network": {
+      "allowedDomains": [
+        "proxy.golang.org",
+        "*.pkg.go.dev",
+        "github.com",
+        "*.docker.io",
+        "*.dockerhub.com",
+        "registry.hub.docker.com"
+      ],
+      "allowUnixSockets": [
+        "/var/run/docker.sock",
+        "~/.rd/docker.sock"
+      ],
+      "allowLocalBinding": true
+    }
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/docker-auto-wrapper.sh",
+            "timeout": 90
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "deny": [
+      "Bash(git push --force*)",
+      "Bash(git push -f *)",
+      "Bash(git push * -f*)",
+      "Bash(git push *--force*)",
+      "Bash(git reset --hard*)",
+      "Bash(git branch -D*)",
+      "Bash(git push * --delete*)",
+      "Bash(git push --delete*)",
+      "Bash(git clean -f*)",
+      "Bash(git checkout .)",
+      "Bash(git restore .)",
+      "Bash(git push *)",
+      "Bash(git commit --amend*)",
+      "Bash(git rebase*)",
+      "Bash(git merge*)",
+      "Bash(git stash drop*)",
+      "Bash(git tag -d*)",
+      "Bash(docker-compose down -v*)",
+      "Bash(docker-compose down *-v*)",
+      "Bash(docker-compose down*--volumes*)",
+      "Bash(docker system prune*)",
+      "Bash(docker volume rm*)",
+      "Bash(docker volume prune*)",
+      "Bash(docker rm -f *)",
+      "Bash(docker container prune*)",
+      "Bash(docker image prune -a*)",
+      "Bash(docker rmi *-f*)",
+      "Bash(docker network prune*)",
+      "Bash(docker-compose kill*)",
+      "Bash(docker stop *)",
+      "Bash(docker kill *)",
+      "Bash(rm *go.mod*)",
+      "Bash(rm *go.sum*)",
+      "Bash(rm *docker-compose.yml*)",
+      "Bash(rm *Dockerfile*)",
+      "Bash(rm *.claude/settings.json*)",
+      "Bash(rm *.claude/hooks/*)",
+      "Bash(rm *CLAUDE.md*)",
+      "Bash(rm -rf .git*)",
+      "Bash(find * -delete*)",
+      "Bash(find * -exec rm*)",
+      "Bash(*| sh)",
+      "Bash(*| bash)",
+      "Bash(*| sh *)",
+      "Bash(*| bash *)",
+      "Edit(.env)",
+      "Write(.env)",
+      "Edit(go.mod)",
+      "Edit(go.sum)",
+      "Edit(docker-compose.yml)",
+      "Edit(.claude/settings.json)",
+      "Write(.claude/settings.json)"
+    ]
+  }
+}

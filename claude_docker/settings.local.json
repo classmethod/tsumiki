@@ -1,0 +1,11 @@
+{
+  "sandbox": {
+    "network": {
+      "allowUnixSockets": [
+        "/var/run/docker.sock",
+        "/Users/USER_NAME/.rd/docker.sock"
+      ]
+    },
+    "filesystem": {}
+  }
+}

@@ -32,6 +32,19 @@ docs/rule/kairo/requirements/ # kairo-requirements専用ルール
 
 これらのディレクトリ内の `.md` ファイルは、コマンド実行時にコンテキストとして自動読み込みされます。
 
+#### --permission-mode　　bypassPermissions の利用
+
+可能な限り隔離された環境を用意する方法について *サンプル* を公開しました
+利用についてはマニュアル https://code.claude.com/docs/en/permissions#permission-modes を必ず参照してください
+claude code をホストのsandbox環境下で利用し、ファイルの変更など一部のコマンド以外全てを docker内で実行する *サンプル* を用意しています
+claude_docker/ ディレクトリを参考に構築してください（pluginとしては扱わないようにしてます）
+仕組みは、hooksを利用してtool実行のうち許可されてないものは全てdocker上で動作するコマンドを書き換えています
+
+テスト済みの動作環境は、Mac/RancherDesktop(docker)/go です
+※これはtsumikiの長時間実行の試験をする目的で作成されました。実プロジェクトでの適用についてはそれぞれのプロジェクトで判断・変更してください
+
+改善方法についてのPRをお待ちしてます
+
 ### TDDコマンド
 
 TASK作成時に `TDD` と判定している場合で個別にTDDプロセスを実行したい場合は、以下のコマンドを順次実行できます：
@@ -152,7 +165,11 @@ Kairoは以下を生成します：
 
 # 特定のタスクのみ実装
 /tsumiki:kairo-implement  タスクファイル名　TASK番号
-# "TASK-101を実装してください"
+
+# タスク範囲を指定して実装 タスクディレクトリ名　開始TASK番号 終了TASK番号
+/tsumiki:kairo-loop 
+（実行中にcompactが発動しても安定して「長時間処理」が可能です
+
 ```
 
 Kairoは各タスクに対して内部的にTDDコマンドを使用して以下のプロセスを実行します：
