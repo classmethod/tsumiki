@@ -1,7 +1,7 @@
 ---
 name: ipa-security-guide
 description: ipa-security-check をはじめとするセキュリティ診断ツールが出力したレポートを読み込み、各検出項目を優先順位付きの dev-debug 依頼リストに変換する。対象プロジェクトの言語・FWを問わず汎用的に使える。コードベースを直接読んでアーキテクチャ判断を行う。
-argument-hint: "[レポートファイルパス (省略時: ./ipa-security-report.md)] [-o 出力ファイルパス]"
+argument-hint: "[レポートファイルパス (省略時: ipa-security-report-*.md を自動検出)] [-o 出力ファイルパス]"
 ---
 
 # IPA Security Guide Skill
@@ -25,7 +25,10 @@ argument-hint: "[レポートファイルパス (省略時: ./ipa-security-repor
 /ipa-security-guide <レポートファイルパス> -o <出力ファイルパス>
 ```
 
-- レポートファイルパスを省略した場合はカレントディレクトリの `ipa-security-report.md` を使う
+- レポートファイルパスを省略した場合は、`security-reports/ipa-security-report-*.md` を優先して自動検出する。見つからない場合はカレントディレクトリの `ipa-security-report-*.md` も検索する
+  - **1件のみ**: 自動で使用する
+  - **複数件**: ファイル名一覧を提示し、AskUserQuestion でユーザーに選んでもらう
+  - **0件**: `ipa-security-report.md` へのフォールバックを試みる。それも存在しない場合はエラーを報告して終了する
 - `-o` を指定した場合は結果をそのパスに Write する。省略した場合は画面出力のみ
 
 ## 前提条件
@@ -51,7 +54,7 @@ ipa-security-guide/
 
 以下をすべて Read する。件ごとに読み直さない。
 
-1. 指定された（または `./ipa-security-report.md`）レポートファイル
+1. レポートファイル（「起動方法」のファイル検出ルールに従って特定する）
    - 存在しない場合はエラーを報告して終了
    - レポートのヘッダーからプロジェクトのルートディレクトリを推定する
 2. `knowledge/triage.md`

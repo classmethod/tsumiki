@@ -1,6 +1,6 @@
 {
   "name": "tsumiki",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "AI-driven development toolkit for TDD and SDD workflows, providing comprehensive command templates and agents to enhance developer productivity with Claude Code",
   "author": {
     "name": "makoto kuroeda",

@@ -47,7 +47,7 @@ IPA (情報処理推進機構) が公開する以下 5 資料の指摘事項に�
    - verdict を `snippet_hash` で findings にマージ
    - 既存 Markdown レポートから triage ブロックを抽出 (`lib/triage_state.md` 準拠) し、`snippet_hash` 一致で新 findings にステータス引き継ぎ
    - `templates/report.md.tmpl` を埋めて Markdown を出力、SARIF 2.1.0 も同時生成
-7. デフォルトの保存先は `./ipa-security-report.md` と `./ipa-security-report.sarif` (`--output` で上書き)
+7. デフォルトの保存先は `./security-reports/ipa-security-report-YYYY-MM-DD-NN.md` と `./security-reports/ipa-security-report-YYYY-MM-DD-NN.sarif` (`--output` で上書き可)。`security-reports/` ディレクトリが存在しない場合は自動作成する。同日に複数回実行した場合は連番 (`-01`, `-02`, ...) が自動付与され、既存レポートを上書きしない
 
 中間ファイルの作業ディレクトリは `.tmp/ipa-security-check/` (リポジトリルート直下、名前に `tmp` を含めること)。
 

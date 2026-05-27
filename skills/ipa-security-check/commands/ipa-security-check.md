@@ -21,7 +21,7 @@ IPA「安全なウェブサイトの作り方 改訂第7版」ほか 4 資料に
 | `--diff` | 任意 | 現ブランチと `main` の差分ファイルのみを対象 |
 | `--categories <list>` | 任意 | カンマ区切りでカテゴリ限定。指定可能値: `sqli, oscmd, traversal, session, xss, csrf, http-header, mail-header, clickjacking, bof, access-control, safe-sql, whc, ops` |
 | `--severity <level>` | 任意 | 報告下限。`critical, high, medium, low, info` のいずれか。デフォルト `low` |
-| `--output <files>` | 任意 | カンマ区切りで出力ファイル指定。デフォルト `ipa-security-report.md,ipa-security-report.sarif` |
+| `--output <files>` | 任意 | カンマ区切りで出力ファイル指定。デフォルト `security-reports/ipa-security-report-YYYY-MM-DD-NN.md,security-reports/ipa-security-report-YYYY-MM-DD-NN.sarif`（日付・連番自動付与、ディレクトリ自動作成） |
 
 ## 使用例
 

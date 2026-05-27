@@ -307,22 +307,34 @@ prompt: <下記>
 
 `lib/output_formatter.md` と `templates/report.md.tmpl` の仕様は `scripts/render_report.py` に実装済み。メインは以下を Bash で実行する:
 
+**`--output` が省略されている場合**: 以下の Bash で日付・連番付きのファイル名を決定してから `render_report.py` を実行する:
+
 ```bash
+DATE=$(date +%Y-%m-%d)
+mkdir -p ./security-reports
+NN=01
+while [ -f "./security-reports/ipa-security-report-${DATE}-${NN}.md" ]; do
+  NN=$(printf "%02d" $((10#$NN + 1)))
+done
+MD_OUT="./security-reports/ipa-security-report-${DATE}-${NN}.md"
+SARIF_OUT="./security-reports/ipa-security-report-${DATE}-${NN}.sarif"
+
 python3 .claude/skills/ipa-security-check/scripts/render_report.py \
     .tmp/ipa-security-check/findings_with_hash.json \
     .tmp/ipa-security-check/verdicts.json \
-    ./ipa-security-report.md \
-    ./ipa-security-report.sarif \
+    "$MD_OUT" \
+    "$SARIF_OUT" \
     --scope-summary "<scope の人間可読要約>" \
     --files-scanned <N>
 ```
+
+**`--output` が指定されている場合**: 指定された値を第 3・第 4 引数として使う。
 
 このスクリプトが行う処理:
 1. verdict を `snippet_hash` で findings にマージ (Step 5.4 相当)
 2. 出力先 Markdown が存在すれば triage を引き継ぎ (Step 6 相当)
 3. 3 セクション振り分け / サマリ集計 / `templates/report.md.tmpl` 置換 / SARIF 生成
 
-`--output` で別パスが指定されていれば、第 3・第 4 引数をそのパスに差し替える。
 最後にユーザーへ要約を 1〜2 文で報告する (件数とファイル名)。
 
 ---
