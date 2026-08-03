@@ -1,0 +1,15 @@
+{
+  "name": "tsumiki-legacy",
+  "version": "1.5.0",
+  "description": "Legacy Tsumiki commands (kairo, tdd, direct workflows) provided as an opt-in plugin for backward compatibility",
+  "author": {
+    "name": "makoto kuroeda",
+    "email": "kuroeda.makoto@classmethod.jp"
+  },
+  "homepage": "https://github.com/classmethod/tsumiki",
+  "repository": "https://github.com/classmethod/tsumiki",
+  "license": "MIT",
+  "keywords": ["ai-development", "sdd", "tdd", "legacy"],
+  "commands": "./commands/",
+  "skills": "./skills/"
+}

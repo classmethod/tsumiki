@@ -12,7 +12,7 @@ DIRECTタスクで実行した設定作業の動作確認とテストを行い�
 
 ## 前提条件
 
-- `/tsumiki:direct-setup` が実行済み
+- `/tsumiki-legacy:direct-setup` が実行済み
 - タスクIDが提供されている
 - 設定作業の記録が存在する
 

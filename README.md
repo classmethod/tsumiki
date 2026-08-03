@@ -15,7 +15,17 @@ Tsumikiを使用するには、次のClaude Code Pluginコマンドでインス�
 
 このコマンドを実行すると、TsumikiのClaude Codeスラッシュコマンドとエージェントが自動的にインストールされます。
 
-**注意**: コマンドは `/tsumiki:` プレフィックス付きで実行します（例：`/tsumiki:kairo-requirements`）。
+**注意**: コマンドは `/tsumiki:` プレフィックス付きで実行します（例：`/tsumiki:dev-plan`）。
+
+### レガシープラグイン（オプトイン）
+
+`Kairo` / `TDD` / `DIRECT` の従来コマンドは、オプトインのレガシープラグイン `tsumiki-legacy` として分離されています。これらを利用する場合は、追加で次のコマンドを実行してください：
+
+```bash
+/plugin install tsumiki-legacy@tsumiki
+```
+
+**注意**: レガシーコマンドは `/tsumiki-legacy:` プレフィックス付きで実行します（例：`/tsumiki-legacy:kairo-requirements`）。
 
 ## 概要
 
@@ -23,38 +33,15 @@ Tsumikiは以下のカテゴリで構成されています：
 
 | カテゴリ | 説明 |
 |---------|------|
-| **Kairo** | 要件定義から実装までの包括的な開発フロー |
-| **TDD** | テスト駆動開発の個別実行 |
 | **Dev Skills** | コンテキスト分析・計画・実装・検証・デバッグの統合ワークフロー |
 | **DCS** | コードベースの分析・調査・ドキュメント生成 |
 | **ユーティリティ** | デバッグ支援・小規模修正・オーケストレーション等 |
 | **リバースエンジニアリング** | 既存コードからドキュメントを逆生成 |
+| **Kairo**（Legacy） | 要件定義から実装までの包括的な開発フロー（`tsumiki-legacy` プラグイン） |
+| **TDD**（Legacy） | テスト駆動開発の個別実行（`tsumiki-legacy` プラグイン） |
+| **DIRECT**（Legacy） | 設定作業の実行・検証（`tsumiki-legacy` プラグイン） |
 
 ## 利用可能なコマンド
-
-### Kairoコマンド（包括的開発フロー）
-
-Kairoは要件定義から実装までの開発プロセスを自動化・支援します。
-
-| コマンド | 説明 |
-|---------|------|
-| `init-tech-stack` | 技術スタックの特定 |
-| `kairo-requirements` | 要件定義（EARS記法） |
-| `kairo-design` | 設計文書生成 |
-| `kairo-tasks` | タスク分割 |
-| `kairo-implement` | 実装実行（TDD/DIRECTを内部で使用） |
-| `kairo-loop` | タスク範囲指定の自動連続実装（compact対応） |
-
-### TDDコマンド（個別実行）
-
-| コマンド | 説明 |
-|---------|------|
-| `tdd-requirements` | TDD要件定義 |
-| `tdd-testcases` | テストケース作成 |
-| `tdd-red` | テスト実装（Red） |
-| `tdd-green` | 最小実装（Green） |
-| `tdd-refactor` | リファクタリング |
-| `tdd-verify-complete` | TDD完了確認 |
 
 ### Dev Skills（統合開発ワークフロー）
 
@@ -117,27 +104,64 @@ DCSはコードベースの分析・調査を支援するコマンドスイー�
 | `rev-specs` | 既存コードからテスト仕様書を逆生成 |
 | `rev-requirements` | 既存コードから要件定義書を逆生成 |
 
+### レガシーコマンド（`tsumiki-legacy` プラグイン）
+
+以下は従来の `Kairo` / `TDD` / `DIRECT` コマンドです。オプトインの `tsumiki-legacy` プラグイン（[インストール方法](#レガシープラグインオプトイン)）に含まれ、`/tsumiki-legacy:` プレフィックスで実行します。
+
+#### Kairoコマンド（包括的開発フロー）
+
+| コマンド | 説明 |
+|---------|------|
+| `init-tech-stack` | 技術スタックの特定 |
+| `kairo-requirements` | 要件定義（EARS記法） |
+| `kairo-design` | 設計文書生成 |
+| `kairo-tasks` | タスク分割 |
+| `kairo-implement` | 実装実行（Skills版・TDD/DIRECTを内部で使用） |
+| `kairo-loop` | タスク範囲指定の自動連続実装（compact対応） |
+
+#### TDDコマンド（個別実行）
+
+| コマンド | 説明 |
+|---------|------|
+| `tdd-requirements` | TDD要件定義 |
+| `tdd-testcases` | テストケース作成 |
+| `tdd-red` | テスト実装（Red） |
+| `tdd-green` | 最小実装（Green） |
+| `tdd-refactor` | リファクタリング |
+| `tdd-verify-complete` | TDD完了確認 |
+
+#### DIRECTコマンド
+
+| コマンド | 説明 |
+|---------|------|
+| `direct-setup` | DIRECTタスクの設定作業を実行 |
+| `direct-verify` | DIRECTタスクの設定作業を検証 |
+
+> **補足**: `kairo-implement` は Skills として提供され、上記コマンド群とともにすべて `tsumiki-legacy` プラグインに含まれます。
+
 ## クイックスタート
 
-**注意**: Claude Code Pluginでインストールした場合は、各コマンドの先頭に `tsumiki:` を付けてください（例：`/tsumiki:kairo-requirements`）。
+**注意**: Claude Code Pluginでインストールした場合、基本コマンドは `tsumiki:`、レガシーコマンドは `tsumiki-legacy:` プレフィックスを付けてください。
 
-### Kairoによる包括的な開発フロー
+### Kairoによる包括的な開発フロー（Legacy）
+
+`tsumiki-legacy` プラグインが必要です。
 
 ```bash
 # 1. 技術スタック初期化
-/tsumiki:init-tech-stack
+/tsumiki-legacy:init-tech-stack
 
 # 2. 要件定義
-/tsumiki:kairo-requirements
+/tsumiki-legacy:kairo-requirements
 
 # 3. 設計
-/tsumiki:kairo-design
+/tsumiki-legacy:kairo-design
 
 # 4. タスク分割
-/tsumiki:kairo-tasks
+/tsumiki-legacy:kairo-tasks
 
 # 5. 実装（自動連続実装）
-/tsumiki:kairo-loop
+/tsumiki-legacy:kairo-loop
 ```
 
 ### Dev Skillsによる開発フロー
@@ -156,15 +180,17 @@ DCSはコードベースの分析・調査を支援するコマンドスイー�
 /tsumiki:dev-verify auth
 ```
 
-### 個別TDDプロセス
+### 個別TDDプロセス（Legacy）
+
+`tsumiki-legacy` プラグインが必要です。
 
 ```bash
-/tsumiki:tdd-requirements
-/tsumiki:tdd-testcases
-/tsumiki:tdd-red
-/tsumiki:tdd-green
-/tsumiki:tdd-refactor
-/tsumiki:tdd-verify-complete
+/tsumiki-legacy:tdd-requirements
+/tsumiki-legacy:tdd-testcases
+/tsumiki-legacy:tdd-red
+/tsumiki-legacy:tdd-green
+/tsumiki-legacy:tdd-refactor
+/tsumiki-legacy:tdd-verify-complete
 ```
 
 ### リバースエンジニアリング

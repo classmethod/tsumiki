@@ -56,7 +56,7 @@ PRDファイル={{prd_file_path}}
 - **タスクノートの読み込み**
   - `docs/spec/{要件名}/note.md` が存在する場合は読み込み
   - 存在しない場合:
-    - Task ツールを使用して subagent_type: "general-purpose" で `/tsumiki:kairo-tasknote {要件名}` コマンドを実行してノートを生成
+    - Task ツールを使用して subagent_type: "general-purpose" で `/tsumiki-legacy:kairo-tasknote {要件名}` コマンドを実行してノートを生成
     - 生成されたノートファイルを読み込み
   - ノートには技術スタック、開発ルール、関連実装、設計文書、注意事項が含まれる
 
@@ -283,7 +283,7 @@ AskUserQuestion ツールを使って、選択された項目に応じた質問�
   - 各ファイル内のリンクが正しく設定されていることを確認
   - 既存設計書・実装との整合性確認を促すメッセージ
 
-- 次のステップ表示: 「次のお勧めステップ: `/tsumiki:kairo-design {要件名}` で技術設計文書を作成します。」
+- 次のステップ表示: 「次のお勧めステップ: `/tsumiki-legacy:kairo-design {要件名}` で技術設計文書を作成します。」
 
 # rules
 

@@ -1,7 +1,7 @@
 ---
 description: 分割されたタスクを順番に、またはユーザが指定したタスクを実装します。既存のTDDコマンドを活用して品質の高い実装を行います。
 allowed-tools: Read, Glob, Grep, Task, Write, Edit, TodoWrite, AskUserQuestion, TaskList, TaskGet, TaskUpdate
-allowed-skills: tsumiki:tdd-tasknote, tsumiki:tdd-requirements, tsumiki:tdd-testcases, tsumiki:tdd-red, tsumiki:tdd-green, tsumiki:tdd-refactor, tsumiki:tdd-verify-complete, tsumiki:direct-setup, tsumiki:direct-verify
+allowed-skills: tsumiki-legacy:tdd-tasknote, tsumiki-legacy:tdd-requirements, tsumiki-legacy:tdd-testcases, tsumiki-legacy:tdd-red, tsumiki-legacy:tdd-green, tsumiki-legacy:tdd-refactor, tsumiki-legacy:tdd-verify-complete, tsumiki-legacy:direct-setup, tsumiki-legacy:direct-verify
 argument-hint: "[要件名（省略可）] [TASK-ID (TASK-00001)] [--hil]"
 ---
 あなたは実装担当者です。残タスクを調べて、指定されたコマンドを駆使して実装をしてください

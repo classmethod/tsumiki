@@ -11,7 +11,17 @@ Claude Code Pluginを使用してTsumikiをインストールします：
 /plugin install tsumiki@tsumiki
 ```
 
-**注意**: コマンドは `/tsumiki:` プレフィックス付きで実行します（例：`/tsumiki:kairo-requirements`）。
+**注意**: コマンドは `/tsumiki:` プレフィックス付きで実行します（例：`/tsumiki:dev-plan`）。
+
+#### レガシープラグイン（オプトイン）
+
+`Kairo` / `TDD` / `DIRECT` の従来コマンドは、オプトインのレガシープラグイン `tsumiki-legacy` として分離されています。利用する場合は追加でインストールしてください：
+
+```bash
+/plugin install tsumiki-legacy@tsumiki
+```
+
+**注意**: レガシーコマンドは `/tsumiki-legacy:` プレフィックス付きで実行します（例：`/tsumiki-legacy:kairo-requirements`）。本マニュアルの Kairo / TDD / DIRECT セクションのコマンドがこれに該当します。
 
 #### プロジェクト固有のルール設定
 
@@ -47,12 +57,14 @@ claude_docker/ ディレクトリを参考に構築してください（plugin�
 
 ### Kairoコマンド（包括的フロー）
 
+> **Legacy**: `init-tech-stack` / `kairo-requirements` / `kairo-design` / `kairo-tasks` / `kairo-loop` / `kairo-implement`（Skills版）はいずれもオプトインの `tsumiki-legacy` プラグインに含まれ、`/tsumiki-legacy:` プレフィックスで実行します。
+
 #### 1. 技術スタック初期化
 
 プロジェクトの技術スタック（フレームワーク、ライブラリ）を初期化します：
 
 ```
-/tsumiki:init-tech-stack
+/tsumiki-legacy:init-tech-stack
 ```
 
 init-tech-stack は以下を生成します：
@@ -64,7 +76,7 @@ init-tech-stack は以下を生成します：
 最初に、プロジェクトの要件概要をKairoに伝えます：
 
 ```
-/tsumiki:kairo-requirements 要件概要
+/tsumiki-legacy:kairo-requirements 要件概要
 
 # プロンプト例：
 # "ECサイトの商品レビュー機能を実装したい。
@@ -85,7 +97,7 @@ Kairoは以下を生成します：
 要件を確認・修正した後、設計を依頼します：
 
 ```
-/tsumiki:kairo-design（または省略可能）
+/tsumiki-legacy:kairo-design（または省略可能）
 
 # 要件を承認済みであることを伝えてください
 ```
@@ -104,12 +116,12 @@ Kairoは以下を生成します：
 設計を確認した後（承認は省略可）、タスク分割を実行します：
 
 ```
-/tsumiki:kairo-tasks
+/tsumiki-legacy:kairo-tasks
 
 # 設計を承認したことを伝えてください（または省略可能）
 ```
 
-タスク内容の確認用に `/tsumiki:kairo-task-verify` を実行することをお勧めします。
+タスク内容の確認用に `/tsumiki-legacy:kairo-task-verify` を実行することをお勧めします。
 
 Kairoは以下を生成します：
 - 依存関係を考慮したタスク一覧
@@ -124,13 +136,13 @@ Kairoは以下を生成します：
 
 ```
 # 全タスクを順番に実装
-/tsumiki:kairo-implement
+/tsumiki-legacy:kairo-implement
 
 # 特定のタスクのみ実装
-/tsumiki:kairo-implement  タスクファイル名　TASK番号
+/tsumiki-legacy:kairo-implement  タスクファイル名　TASK番号
 
 # タスク範囲を指定して実装 タスクディレクトリ名　開始TASK番号 終了TASK番号
-/tsumiki:kairo-loop
+/tsumiki-legacy:kairo-loop
 （実行中にcompactが発動しても安定して「長時間処理」が可能です）
 ```
 
@@ -147,7 +159,7 @@ Kairoは各タスクに対して内部的にTDDコマンドを使用して以下
 Skills版のkairo-implementは、Claude Codeのタスクシステムと連携した高度な実装スキルです。
 
 ```
-/tsumiki:kairo-implement [要件名] [TASK-ID] [--hil]
+/tsumiki-legacy:kairo-implement [要件名] [TASK-ID] [--hil]
 ```
 
 **特徴**:
@@ -162,38 +174,42 @@ Skills版のkairo-implementは、Claude Codeのタスクシステムと連携し
 
 ### TDDコマンド
 
+> **Legacy**: TDDコマンドはオプトインの `tsumiki-legacy` プラグインに含まれ、`/tsumiki-legacy:` プレフィックスで実行します。
+
 TASK作成時に `TDD` と判定している場合で個別にTDDプロセスを実行したい場合は、以下のコマンドを順次実行できます：
 
 ```
 # TDD要件定義
-/tsumiki:tdd-requirements タスクファイル名　TASK番号
+/tsumiki-legacy:tdd-requirements タスクファイル名　TASK番号
 
 # テストケース作成
-/tsumiki:tdd-testcases タスクファイル名　TASK番号
+/tsumiki-legacy:tdd-testcases タスクファイル名　TASK番号
 
 # テスト実装（Red）
-/tsumiki:tdd-red タスクファイル名　TASK番号
+/tsumiki-legacy:tdd-red タスクファイル名　TASK番号
 
 # 最小実装（Green）
-/tsumiki:tdd-green タスクファイル名　TASK番号
+/tsumiki-legacy:tdd-green タスクファイル名　TASK番号
 
 # リファクタリング
-/tsumiki:tdd-refactor タスクファイル名　TASK番号
+/tsumiki-legacy:tdd-refactor タスクファイル名　TASK番号
 
 # TDD完了確認
-/tsumiki:tdd-verify-complete タスクファイル名　TASK番号
+/tsumiki-legacy:tdd-verify-complete タスクファイル名　TASK番号
 ```
 
 ### DIRECTコマンド
+
+> **Legacy**: DIRECTコマンドはオプトインの `tsumiki-legacy` プラグインに含まれ、`/tsumiki-legacy:` プレフィックスで実行します。
 
 TASK作成時に `DIRECT` と判定している場合は、以下のコマンドを順次実行できます：
 
 ```
 # DIRECT準備
-/tsumiki:direct-setup タスクファイル名　TASK番号
+/tsumiki-legacy:direct-setup タスクファイル名　TASK番号
 
 # DIRECT検証
-/tsumiki:direct-verify タスクファイル名　TASK番号
+/tsumiki-legacy:direct-verify タスクファイル名　TASK番号
 ```
 
 ### リバースエンジニアリングコマンド
@@ -503,15 +519,15 @@ IPA（情報処理推進機構）が公開する以下5つの公式資料に基�
 
 ```mermaid
 flowchart TD
-    A[要件概要を伝える] --> B[tsumiki:kairo-requirements]
+    A[要件概要を伝える] --> B[tsumiki-legacy:kairo-requirements]
     B --> C{要件を確認}
     C -->|修正必要| B
-    C -->|OK| D[tsumiki:kairo-design]
+    C -->|OK| D[tsumiki-legacy:kairo-design]
     D --> E{設計を確認}
     E -->|修正必要| D
-    E -->|OK| F[tsumiki:kairo-tasks]
+    E -->|OK| F[tsumiki-legacy:kairo-tasks]
     F --> G{タスクを確認}
-    G -->|OK| H[tsumiki:kairo-implement]
+    G -->|OK| H[tsumiki-legacy:kairo-implement]
     H --> I{全タスク完了?}
     I -->|No| H
     I -->|Yes| J[プロジェクト完了]

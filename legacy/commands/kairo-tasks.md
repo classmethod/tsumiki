@@ -72,7 +72,7 @@ claude_code_task登録={{register_to_claude_code_task}}
 - **タスクノートの読み込み**
   - `docs/spec/{要件名}/note.md` が存在する場合は読み込み
   - 存在しない場合:
-    - Task ツールを使用して subagent_type: "general-purpose" で `/tsumiki:kairo-tasknote {要件名}` コマンドを実行してノートを生成
+    - Task ツールを使用して subagent_type: "general-purpose" で `/tsumiki-legacy:kairo-tasknote {要件名}` コマンドを実行してノートを生成
     - 生成されたノートファイルを読み込み
   - ノートには技術スタック、開発ルール、関連実装、設計文書、注意事項が含まれる
 
@@ -341,7 +341,7 @@ AskUserQuestion ツールを使って、選択された項目に応じた質問�
 - `--task` オプションが指定されている場合は step6.5 を実行する
 - そうでない場合は次のステップ表示へ
 
-次のステップ表示: 「次のお勧めステップ: `/tsumiki:kairo-implement` でタスクを実装します。特定のタスクを実装する場合は `/tsumiki:kairo-implement TASK-0001` のように指定してください。」
+次のステップ表示: 「次のお勧めステップ: `/tsumiki-legacy:kairo-implement` でタスクを実装します。特定のタスクを実装する場合は `/tsumiki-legacy:kairo-implement TASK-0001` のように指定してください。」
 
 ### 6.5 Claude Codeタスクへの登録（--taskオプション指定時のみ）
 
@@ -415,7 +415,7 @@ AskUserQuestion ツールを使って、選択された項目に応じた質問�
   タスクの確認: TaskList ツールで確認できます
   タスクの開始: TaskUpdate で status を 'in_progress' に変更してください
 
-  次のお勧めステップ: `/tsumiki:kairo-implement` でタスクを実装します。
+  次のお勧めステップ: `/tsumiki-legacy:kairo-implement` でタスクを実装します。
   ```
 
 #### 注意事項
@@ -507,16 +507,16 @@ AskUserQuestion ツールを使って、選択された項目に応じた質問�
 ## タスクプロセス定義
 
 ### TDDタスク
-1. `/tsumiki:tdd-requirements` - 詳細要件定義
-2. `/tsumiki:tdd-testcases` - テストケース作成
-3. `/tsumiki:tdd-red` - テスト実装（失敗）
-4. `/tsumiki:tdd-green` - 最小実装
-5. `/tsumiki:tdd-refactor` - リファクタリング
-6. `/tsumiki:tdd-verify-complete` - 品質確認
+1. `/tsumiki-legacy:tdd-requirements` - 詳細要件定義
+2. `/tsumiki-legacy:tdd-testcases` - テストケース作成
+3. `/tsumiki-legacy:tdd-red` - テスト実装（失敗）
+4. `/tsumiki-legacy:tdd-green` - 最小実装
+5. `/tsumiki-legacy:tdd-refactor` - リファクタリング
+6. `/tsumiki-legacy:tdd-verify-complete` - 品質確認
 
 ### DIRECTタスク
-1. `/tsumiki:direct-setup` - 直接実装・設定
-2. `/tsumiki:direct-verify` - 動作確認・品質確認
+1. `/tsumiki-legacy:direct-setup` - 直接実装・設定
+2. `/tsumiki-legacy:direct-verify` - 動作確認・品質確認
 
 ## Claude Codeタスク登録のルール
 
@@ -580,7 +580,7 @@ metadata: {
 ### 基本的な使用方法
 
 ```
-/tsumiki:kairo-tasks ユーザー認証システム --task
+/tsumiki-legacy:kairo-tasks ユーザー認証システム --task
 ```
 
 このコマンドは以下を実行します：
@@ -590,7 +590,7 @@ metadata: {
 ### オプションなしの使用方法
 
 ```
-/tsumiki:kairo-tasks ユーザー認証システム
+/tsumiki-legacy:kairo-tasks ユーザー認証システム
 ```
 
 タスクファイルのみを作成し、Claude Codeタスクシステムには登録しません。
@@ -859,8 +859,8 @@ TASK-0001 → TASK-0002 → TASK-0011 → TASK-0012 → TASK-0021 → TASK-0031 
 ## 次のステップ
 
 タスクを実装するには:
-- 全タスク順番に実装: `/tsumiki:kairo-implement`
-- 特定タスクを実装: `/tsumiki:kairo-implement TASK-0001`
+- 全タスク順番に実装: `/tsumiki-legacy:kairo-implement`
+- 特定タスクを実装: `/tsumiki-legacy:kairo-implement TASK-0001`
 </overview_template>
 
 <full_task_template>
@@ -1001,17 +1001,17 @@ describe('{テスト対象}', () => {
 
 ### TDDタスクの場合
 
-1. `/tsumiki:tdd-requirements TASK-{番号}` - 詳細要件定義
-2. `/tsumiki:tdd-testcases` - テストケース作成
-3. `/tsumiki:tdd-red` - テスト実装（失敗）
-4. `/tsumiki:tdd-green` - 最小実装
-5. `/tsumiki:tdd-refactor` - リファクタリング
-6. `/tsumiki:tdd-verify-complete` - 品質確認
+1. `/tsumiki-legacy:tdd-requirements TASK-{番号}` - 詳細要件定義
+2. `/tsumiki-legacy:tdd-testcases` - テストケース作成
+3. `/tsumiki-legacy:tdd-red` - テスト実装（失敗）
+4. `/tsumiki-legacy:tdd-green` - 最小実装
+5. `/tsumiki-legacy:tdd-refactor` - リファクタリング
+6. `/tsumiki-legacy:tdd-verify-complete` - 品質確認
 
 ### DIRECTタスクの場合
 
-1. `/tsumiki:direct-setup` - 直接実装・設定
-2. `/tsumiki:direct-verify` - 動作確認・品質確認
+1. `/tsumiki-legacy:direct-setup` - 直接実装・設定
+2. `/tsumiki-legacy:direct-verify` - 動作確認・品質確認
 
 ---
 
@@ -1108,17 +1108,17 @@ describe('{テスト対象}', () => {
 
 ### TDDタスクの場合
 
-1. `/tsumiki:tdd-requirements TASK-{番号}` - 詳細要件定義
-2. `/tsumiki:tdd-testcases` - テストケース作成
-3. `/tsumiki:tdd-red` - テスト実装（失敗）
-4. `/tsumiki:tdd-green` - 最小実装
-5. `/tsumiki:tdd-refactor` - リファクタリング
-6. `/tsumiki:tdd-verify-complete` - 品質確認
+1. `/tsumiki-legacy:tdd-requirements TASK-{番号}` - 詳細要件定義
+2. `/tsumiki-legacy:tdd-testcases` - テストケース作成
+3. `/tsumiki-legacy:tdd-red` - テスト実装（失敗）
+4. `/tsumiki-legacy:tdd-green` - 最小実装
+5. `/tsumiki-legacy:tdd-refactor` - リファクタリング
+6. `/tsumiki-legacy:tdd-verify-complete` - 品質確認
 
 ### DIRECTタスクの場合
 
-1. `/tsumiki:direct-setup` - 直接実装・設定
-2. `/tsumiki:direct-verify` - 動作確認・品質確認
+1. `/tsumiki-legacy:direct-setup` - 直接実装・設定
+2. `/tsumiki-legacy:direct-verify` - 動作確認・品質確認
 
 ---
 

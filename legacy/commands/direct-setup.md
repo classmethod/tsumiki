@@ -197,7 +197,7 @@ psql -d mydb -f database-schema.sql
 
 ## 次のステップ
 
-- `/tsumiki:direct-verify` を実行して設定を確認
+- `/tsumiki-legacy:direct-verify` を実行して設定を確認
 - 必要に応じて設定の調整を実施
 ```
 </setup_report_format>

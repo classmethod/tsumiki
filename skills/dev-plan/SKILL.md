@@ -21,6 +21,10 @@ dev-context → [dev-plan] → dev-impl → dev-verify
 - `docs/dev/context.md` が存在すること（dev-contextで生成済み）
 - context.md がない場合、先に `/dev-context` の実行を案内する
 
+### 依存スキル
+
+- **`task-breakdown`**: Full-spec モードの Phase 3（タスク分解）で、その4フェーズ分解手順を embedded 規約に準じてインライン適用する（詳細は Phase 3「Full-spec モード」参照）。
+
 ### 引数フォーマット
 
 ```
@@ -137,13 +141,31 @@ Plan サブエージェント（`subagent_type: Plan`）で関連コードベー
 
 ### Phase 3: タスク分解
 
-テスト可能な単位にタスクを分割する:
+テスト可能な単位にタスクを分割する。**Full-spec モードでは `task-breakdown` スキルの分解手順をインライン適用し、Lightweight モードでは従来手順で分割する。**
+
+#### Lightweight モード
+
+メインコンテキスト内で以下を実施する:
 
 1. **タスクの粒度**: 1タスク = 1つのテスト可能な振る舞い単位
 2. **依存関係グラフ**: タスク間の実装順序を決定する
 3. **複雑度見積もり**: 各タスクを low / medium / high に分類
 4. **テスト方針**: 各タスクに「何をテストするか」を明記する
 5. **ファイル影響範囲**: 各タスクが影響するファイルパスを列挙する
+
+#### Full-spec モード（task-breakdown インライン適用）
+
+`task-breakdown` スキルの4フェーズ（ゴール正規化 → 構造分解 → 粒度停止 → 分割検証）を、**サブエージェントに委譲せずメインコンテキスト内でインライン適用**する。`skills/task-breakdown/SKILL.md` と `skills/task-breakdown/references/output-template.md` を Read で参照し、embedded モードの規約（ファイル保存せず結果を保持）に準じて進める。
+
+1. **入力の受け渡し**: task-breakdown の Phase 1（ゴール正規化）へ、dev-plan で確定済みの文脈を以下のように渡す:
+   - **ゴール** ← Phase 1.5 の `requirements.md`（FR-XXX/NFR-XXX）と `acceptance-criteria.md`（AC-XXX の Given/When/Then）
+   - **制約** ← `requirements.md` の制約（CON-XXX）・非機能要件、context.md の技術スタック
+   - **前提** ← Phase 2 の設計成果物（インターフェース定義・データフロー・依存関係）と既存コード資産
+   - **期待する葉タスク粒度** ← 「1タスク = dev-impl 1回で完了（テストファイル1つ + 実装ファイル1-2つ / テストケース3-8個）」を明示的に渡す
+2. **Phase 1〜4 の適用**: 上記入力でゴールを正規化し、トップダウンで構造分解（1階層1軸）、粒度停止条件（見積もり可能・単独実施可能・検証可能・サイズ均一）を適用し、MECE・依存関係・DoD・粒度の4検証を通す。
+   - task-breakdown の粒度停止条件は dev-plan の「dev-impl 1回で完了する単位」に読み替える。
+   - 確信度 🔴 の未確定事項が残る場合は AskUserQuestion で解消してから Phase 4 に進む（embedded のエスカレーションをメイン側で受ける）。
+3. **出力の受け取り**: task-breakdown の成果物（`output-template.md` の 1.ゴール定義 / 2.分割ツリー / 3.葉タスク詳細（表）/ 4.検証結果）をメインコンテキストに保持する。この葉タスク群を Phase 4 でタスクファイルへ変換する（変換規則は Phase 4「葉タスク → タスクファイルの変換（Full-spec）」を参照）。
 
 ### Phase 4: ファイル出力
 
@@ -196,11 +218,29 @@ docs/dev/plans/<plan-name>/
 [他のPlanとの共有インターフェースがある場合に記載]
 ```
 
-Full-spec モードの場合、Requirements Summary に要件ドキュメントへの相対リンクを記載する。
+Full-spec モードの場合、Requirements Summary に要件ドキュメントへの相対リンクを記載する。また Task Dependency Graph には、Phase 3 で得た task-breakdown の「検証結果」（依存関係・トポロジカル順）をそのまま反映し、タスクファイルの `dependencies` と矛盾しないようにする。
 
 #### タスクファイルの生成
 
 各タスクを `docs/dev/plans/<plan-name>/tasks/NNN-task-name.md` に出力する。`references/task-template.md` のテンプレートに従う。
+
+#### 葉タスク → タスクファイルの変換（Full-spec）
+
+Full-spec モードでは、Phase 3 で得た task-breakdown の葉タスク（`output-template.md` の「3. 葉タスク詳細（表）」）を、以下の対応でタスクファイルへ変換する:
+
+| task-breakdown の葉タスク | dev-plan タスクファイル | 変換方針 |
+|---------------------------|-------------------------|----------|
+| 葉タスク ID（T-XX） | フロントマター `id` | トポロジカル順に 001 から連番へ振り直す |
+| タスク名 | フロントマター `title` / `# Task:` | 動詞始まりに整える |
+| DoD / 受け入れ条件 | 本文 `## Test Strategy` | 検証可能な振る舞いのチェックリストへ具体化（正常系・異常系・エッジケース） |
+| 依存（葉タスク ID） | フロントマター `dependencies` | 振り直した 001 形式の ID 配列へ変換 |
+| 見積り（S/M/L） | フロントマター `estimated_complexity` | S→low / M→medium / L→high に対応 |
+| 分割軸・親子位置 | フロントマター `priority` | インターフェース定義/基盤タスクを 1、以降を機能重要度で 2〜5 に設定 |
+| 確信度（🔵🟡🔴） | 本文 `## Interfaces` の信号機 | Phase 2 設計のインターフェース確信度と突き合わせて付与 |
+| Phase 2 設計のインターフェース | 本文 `## Interfaces` / `## Files` | 該当インターフェース定義と影響ファイルを転記 |
+
+- 葉タスクに紐づく Phase 2 の設計要素（型・インターフェース）を `## Interfaces` に転記し、`references/task-template.md` の記述ガイドに従って肉付けする。
+- task-breakdown の「4. 検証結果（依存関係・トポロジカル順）」を plan.md の Task Dependency Graph に反映する（Phase 4「plan.md の生成」参照）。
 
 ## 信号機システム
 
@@ -225,6 +265,10 @@ Full-spec モードの場合、Requirements Summary に要件ドキュメント�
 - Bash コマンドはプロジェクトルートの **絶対パス** を使用する（`$(git rev-parse --show-toplevel)` でルートを取得）
 
 ## 追加リソース
+
+### 依存スキル
+
+- **`task-breakdown`**（`skills/task-breakdown/`）— Full-spec モードの Phase 3 でインライン適用する汎用タスク分割スキル。`SKILL.md`（4フェーズと embedded 呼び出し規約）と `references/output-template.md`（分割ツリー・葉タスク表・検証結果の出力形式）を参照する。
 
 ### リファレンスファイル
 
