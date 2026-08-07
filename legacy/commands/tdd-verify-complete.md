@@ -29,7 +29,7 @@ Refactorフェーズファイル=./docs/implements/{要件名}/{{task_id}}/{feat
 
 1. **タスクノートの読み込み（唯一のコンテキストソース）**
    - `./docs/implements/{要件名}/{{task_id}}/note.md` を読み込み
-   - 存在しない場合: @task で `/tsumiki:tdd-tasknote {要件名} {{task_id}}` を実行して生成
+   - 存在しない場合: @task で `/tsumiki-legacy:tdd-tasknote {要件名} {{task_id}}` を実行して生成
    - note.mdには技術スタック、開発ルール、関連実装、設計文書、テスト関連情報、注意事項が集約済み
 
 2. **直前フェーズの出力を読み込み**
@@ -358,7 +358,7 @@ step7 を実行する
 🚀 要件定義に対する完全な充実度を達成しました。
 自動で次のTDDサイクルに進みます。
 
-次のお勧めステップ: `/tsumiki:tdd-cycle` で次のTDDサイクルを開始します。
+次のお勧めステップ: `/tsumiki-legacy:tdd-requirements` で次のタスクのTDDサイクルを開始します。
 </complete_output>
 
 <complete_with_scope_warning_output>

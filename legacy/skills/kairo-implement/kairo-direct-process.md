@@ -17,7 +17,7 @@ claude_task_id={{claude_task_id}}
 以下の Task を実行する:
 
 ```
-@Task tool (subagent_type: general-purpose, model: {{tddTaskName}}) /tsumiki:direct-setup {{要件名}} {{TASK-ID}}
+@Task tool (subagent_type: general-purpose, model: {{tddTaskName}}) /tsumiki-legacy:direct-setup {{要件名}} {{TASK-ID}}
 ```
 
 完了したら step-b を実行する
@@ -27,7 +27,7 @@ claude_task_id={{claude_task_id}}
 以下の Task を実行する:
 
 ```
-@Task tool (subagent_type: general-purpose, model: {{tddTaskName}}) /tsumiki:direct-verify {{要件名}} {{TASK-ID}}
+@Task tool (subagent_type: general-purpose, model: {{tddTaskName}}) /tsumiki-legacy:direct-verify {{要件名}} {{TASK-ID}}
 ```
 
 完了したら step-c を実行する

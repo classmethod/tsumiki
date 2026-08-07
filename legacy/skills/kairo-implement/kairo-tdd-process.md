@@ -20,7 +20,7 @@ claude_task_id={{claude_task_id}}
 以下の Task を実行する:
 
 ```
-@Task tool (subagent_type: general-purpose, model: {{noteTaskName}}) /tsumiki:tdd-tasknote {{要件名}} {{TASK-ID}}
+@Task tool (subagent_type: general-purpose, model: {{noteTaskName}}) /tsumiki-legacy:tdd-tasknote {{要件名}} {{TASK-ID}}
 ```
 
 完了したら step-b を実行する
@@ -30,7 +30,7 @@ claude_task_id={{claude_task_id}}
 以下の Task を実行する:
 
 ```
-@Task tool (subagent_type: general-purpose, model: {{thinkTaskName}}) /tsumiki:tdd-requirements {{要件名}} {{TASK-ID}}
+@Task tool (subagent_type: general-purpose, model: {{thinkTaskName}}) /tsumiki-legacy:tdd-requirements {{要件名}} {{TASK-ID}}
 ```
 
 完了したら step-c を実行する
@@ -40,7 +40,7 @@ claude_task_id={{claude_task_id}}
 以下の Task を実行する:
 
 ```
-@Task tool (subagent_type: general-purpose, model: {{thinkTaskName}}) /tsumiki:tdd-testcases {{要件名}} {{TASK-ID}}
+@Task tool (subagent_type: general-purpose, model: {{thinkTaskName}}) /tsumiki-legacy:tdd-testcases {{要件名}} {{TASK-ID}}
 ```
 
 完了後:
@@ -81,7 +81,7 @@ AskUserQuestion ツールでユーザーの選択を取得する:
 以下の Task を実行する:
 
 ```
-@Task tool (subagent_type: general-purpose, model: {{tddTaskName}}) /tsumiki:tdd-red {{要件名}} {{TASK-ID}}
+@Task tool (subagent_type: general-purpose, model: {{tddTaskName}}) /tsumiki-legacy:tdd-red {{要件名}} {{TASK-ID}}
 ```
 
 完了したら step-e を実行する
@@ -91,7 +91,7 @@ AskUserQuestion ツールでユーザーの選択を取得する:
 以下の Task を実行する:
 
 ```
-@Task tool (subagent_type: general-purpose, model: {{tddTaskName}}) /tsumiki:tdd-green {{要件名}} {{TASK-ID}}
+@Task tool (subagent_type: general-purpose, model: {{tddTaskName}}) /tsumiki-legacy:tdd-green {{要件名}} {{TASK-ID}}
 ```
 
 完了したら step-f を実行する
@@ -101,7 +101,7 @@ AskUserQuestion ツールでユーザーの選択を取得する:
 以下の Task を実行する:
 
 ```
-@Task tool (subagent_type: general-purpose, model: {{tddTaskName}}) /tsumiki:tdd-refactor {{要件名}} {{TASK-ID}}
+@Task tool (subagent_type: general-purpose, model: {{tddTaskName}}) /tsumiki-legacy:tdd-refactor {{要件名}} {{TASK-ID}}
 ```
 
 完了したら step-g を実行する
@@ -111,7 +111,7 @@ AskUserQuestion ツールでユーザーの選択を取得する:
 以下の Task を実行する:
 
 ```
-@Task tool (subagent_type: general-purpose, model: {{tddTaskName}}) /tsumiki:tdd-verify-complete {{要件名}} {{TASK-ID}}
+@Task tool (subagent_type: general-purpose, model: {{tddTaskName}}) /tsumiki-legacy:tdd-verify-complete {{要件名}} {{TASK-ID}}
 ```
 
 判定結果に応じた処理:

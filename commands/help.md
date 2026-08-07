@@ -39,24 +39,28 @@ args: {{args}} (引数。空=一覧表示、コマンド名=詳細、それ以�
 
 ## Kairo開発（要件定義〜実装の一気通貫開発）
 
+> オプトインの `tsumiki-legacy` プラグインが必要です（`/plugin install tsumiki-legacy@tsumiki`）。
+
 | コマンド | 説明 |
 |---------|------|
-| /tsumiki:kairo-requirements | 要件の概要からEARS記法を使用した詳細な要件定義書を作成 |
-| /tsumiki:kairo-design | 承認された要件定義書に基づいて技術設計文書を生成 |
-| /tsumiki:kairo-tasks | 設計文書に基づいて実装タスクを1日単位で分割・フェーズ管理 |
-| /tsumiki:kairo-loop | 指定したTASK範囲のkairo実装を開始から終了まで順番に自動実行 |
-| /tsumiki:kairo-implement | 分割されたタスクを順番に、またはユーザが指定したタスクをTDDで実装 |
+| /tsumiki-legacy:kairo-requirements | 要件の概要からEARS記法を使用した詳細な要件定義書を作成 |
+| /tsumiki-legacy:kairo-design | 承認された要件定義書に基づいて技術設計文書を生成 |
+| /tsumiki-legacy:kairo-tasks | 設計文書に基づいて実装タスクを1日単位で分割・フェーズ管理 |
+| /tsumiki-legacy:kairo-loop | 指定したTASK範囲のkairo実装を開始から終了まで順番に自動実行 |
+| /tsumiki-legacy:kairo-implement | 分割されたタスクを順番に、またはユーザが指定したタスクをTDDで実装 |
 
 ## TDD開発（テスト駆動開発の各フェーズ）
 
+> オプトインの `tsumiki-legacy` プラグインが必要です（`/plugin install tsumiki-legacy@tsumiki`）。
+
 | コマンド | 説明 |
 |---------|------|
-| /tsumiki:tdd-requirements | TDD開発の要件整理。機能要件を明確化 |
-| /tsumiki:tdd-testcases | 要件に基づいた包括的なテストケースの洗い出し |
-| /tsumiki:tdd-red | Redフェーズ: 失敗するテストケースを作成 |
-| /tsumiki:tdd-green | Greenフェーズ: テストを通す実装を行う |
-| /tsumiki:tdd-refactor | Refactorフェーズ: コード品質の改善 |
-| /tsumiki:tdd-verify-complete | すべてのテストケースの実装完了を検証 |
+| /tsumiki-legacy:tdd-requirements | TDD開発の要件整理。機能要件を明確化 |
+| /tsumiki-legacy:tdd-testcases | 要件に基づいた包括的なテストケースの洗い出し |
+| /tsumiki-legacy:tdd-red | Redフェーズ: 失敗するテストケースを作成 |
+| /tsumiki-legacy:tdd-green | Greenフェーズ: テストを通す実装を行う |
+| /tsumiki-legacy:tdd-refactor | Refactorフェーズ: コード品質の改善 |
+| /tsumiki-legacy:tdd-verify-complete | すべてのテストケースの実装完了を検証 |
 
 ## デバッグ・修正
 
@@ -70,11 +74,13 @@ args: {{args}} (引数。空=一覧表示、コマンド名=詳細、それ以�
 
 ## セットアップ
 
+> オプトインの `tsumiki-legacy` プラグインが必要です（`/plugin install tsumiki-legacy@tsumiki`）。
+
 | コマンド | 説明 |
 |---------|------|
-| /tsumiki:init-tech-stack | プロジェクト初期設定として技術スタックを選定 |
-| /tsumiki:direct-setup | DIRECTタスクの設定作業（環境構築・設定ファイル・依存関係） |
-| /tsumiki:direct-verify | DIRECTタスクの動作確認とテスト |
+| /tsumiki-legacy:init-tech-stack | プロジェクト初期設定として技術スタックを選定 |
+| /tsumiki-legacy:direct-setup | DIRECTタスクの設定作業（環境構築・設定ファイル・依存関係） |
+| /tsumiki-legacy:direct-verify | DIRECTタスクの動作確認とテスト |
 
 ## リバースエンジニアリング（既存コードからドキュメント逆生成）
 
@@ -152,16 +158,16 @@ args: {{args}} (引数。空=一覧表示、コマンド名=詳細、それ以�
 | テスト不安定, flaky, たまに落ちる, ランダムに失敗, 不安定なテスト | /tsumiki:flaky-fix | flakyテストの安定化 |
 | タイムアウト, テストが遅い, 時間がかかる, timeout | /tsumiki:timeout-fix | タイムアウト問題の改善・テスト分離 |
 | 環境エラー, パッケージ不足, 環境変数, npm ci, モジュール不足, Cannot find module | /tsumiki:env-fix | 環境依存問題の自動修正 |
-| TDD, テスト駆動, テストから書きたい, テストファースト | /tsumiki:tdd-requirements | TDD開発の要件整理から開始 |
-| 要件定義, 要件整理, 仕様を決めたい | /tsumiki:kairo-requirements | EARS記法による要件定義書作成 |
-| 設計, アーキテクチャ, 技術設計 | /tsumiki:kairo-design | 技術設計文書の生成 |
-| タスク分割, 実装計画, スケジュール | /tsumiki:kairo-tasks | タスクの分割とフェーズ管理 |
-| 実装したい, コードを書きたい, 機能追加, 一気通貫 | /tsumiki:kairo-loop | TASK範囲のkairo実装を自動実行 |
-| タスク実装, TDD実装, kairo実装, タスクを実装したい | /tsumiki:kairo-implement | 分割されたタスクをTDDで順番に実装 |
-| 技術スタック, プロジェクト初期設定, 初期化 | /tsumiki:init-tech-stack | 技術スタックの選定 |
+| TDD, テスト駆動, テストから書きたい, テストファースト | /tsumiki-legacy:tdd-requirements | TDD開発の要件整理から開始 |
+| 要件定義, 要件整理, 仕様を決めたい | /tsumiki-legacy:kairo-requirements | EARS記法による要件定義書作成 |
+| 設計, アーキテクチャ, 技術設計 | /tsumiki-legacy:kairo-design | 技術設計文書の生成 |
+| タスク分割, 実装計画, スケジュール | /tsumiki-legacy:kairo-tasks | タスクの分割とフェーズ管理 |
+| 実装したい, コードを書きたい, 機能追加, 一気通貫 | /tsumiki-legacy:kairo-loop | TASK範囲のkairo実装を自動実行 |
+| タスク実装, TDD実装, kairo実装, タスクを実装したい | /tsumiki-legacy:kairo-implement | 分割されたタスクをTDDで順番に実装 |
+| 技術スタック, プロジェクト初期設定, 初期化 | /tsumiki-legacy:init-tech-stack | 技術スタックの選定 |
 | 複雑なタスク, 自動化, 一括実行, 複数ステップ | /tsumiki:orchestrate | エージェントチームによる自動実行 |
-| 設定作業, 環境構築, セットアップ | /tsumiki:direct-setup | DIRECT設定作業の実行 |
-| 動作確認, 設定検証 | /tsumiki:direct-verify | DIRECTタスクの動作確認 |
+| 設定作業, 環境構築, セットアップ | /tsumiki-legacy:direct-setup | DIRECT設定作業の実行 |
+| 動作確認, 設定検証 | /tsumiki-legacy:direct-verify | DIRECTタスクの動作確認 |
 | リバースエンジニアリング, 既存コード分析, ドキュメント逆生成, タスク抽出 | /tsumiki:rev-tasks | 既存コードからタスク一覧を整理 |
 | 既存コード設計, 設計書逆生成, アーキテクチャ抽出 | /tsumiki:rev-design | 既存コードから技術設計文書を逆生成 |
 | 仕様逆生成, テストケース抽出, 仕様書生成 | /tsumiki:rev-specs | 既存コードからテストケース・仕様書を逆生成 |

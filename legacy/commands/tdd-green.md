@@ -30,7 +30,7 @@ Greenフェーズファイル=./docs/implements/{要件名}/{{task_id}}/{feature
 
 1. **タスクノートの読み込み（唯一のコンテキストソース）**
    - `./docs/implements/{要件名}/{{task_id}}/note.md` を読み込み
-   - 存在しない場合: @task で `/tsumiki:tdd-tasknote {要件名} {{task_id}}` を実行して生成
+   - 存在しない場合: @task で `/tsumiki-legacy:tdd-tasknote {要件名} {{task_id}}` を実行して生成
    - note.mdには技術スタック、開発ルール、関連実装、設計文書、テスト関連情報、注意事項が集約済み
 
 2. **直前フェーズの出力を読み込み**
@@ -111,7 +111,7 @@ Greenフェーズファイル=./docs/implements/{要件名}/{{task_id}}/{feature
   - 品質判定結果をTODO内容に記録
   - 次のフェーズ「Refactorフェーズ（品質改善）」をTODOに追加
 
-- **自動遷移判定**: 以下の条件を満たす場合は自動で `/tsumiki:tdd-refactor {要件名} {TASK-ID}` を実行
+- **自動遷移判定**: 以下の条件を満たす場合は自動で `/tsumiki-legacy:tdd-refactor {要件名} {TASK-ID}` を実行
   - Taskツールを使用して全てのテストが成功していることを確認済み
   - 実装がシンプルで理解しやすい
   - 明らかなリファクタリング箇所がある

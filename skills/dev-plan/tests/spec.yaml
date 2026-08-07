@@ -1,0 +1,49 @@
+# Auto-generated from SKILL.md by dev-skill-test --generate-spec
+# Generated: 2026-03-30
+# NOTE: setup と conversation のプレースホルダーは人間が記入してください
+skill: "tsumiki:dev-plan"
+model: "sonnet"
+permission_mode: "bypassPermissions"
+max_budget_usd: 1.0
+
+input:
+  args: 'test-feature "ユーザーのプロフィール画像をアップロードする機能を追加する"'
+
+  # 対話フロー（SKILL.mdのフェーズ定義から雛形を生成）
+  conversation:
+    # Phase 0: モード選択 — AskUserQuestionで聞かれる
+    - reply: "Lightweightでお願いします"
+    # Phase 0.5: plan-name正規化 — 日本語の場合のみ
+    # Phase 1: 要件明確化 — スコープ・振る舞い・影響範囲を聞かれる（2-3ラウンド）
+    - reply: "画像はJPEGとPNGのみ、最大5MBまで。S3にアップロードする"
+    - reply: "既存のユーザー設定画面に追加する形。新規画面は不要"
+    # Phase 2-4: 設計・タスク分解・出力 — 主にサブエージェントで処理
+    - reply: "はい、その設計で進めてください"
+
+# テスト実行前のセットアップ
+setup:
+  - "mkdir -p src/routes src/services tests"
+  - "echo '{\"name\":\"test-project\",\"version\":\"1.0.0\",\"dependencies\":{\"express\":\"^4.18.0\"},\"devDependencies\":{\"vitest\":\"^1.0.0\",\"typescript\":\"^5.0.0\"},\"scripts\":{\"test\":\"vitest run\",\"build\":\"tsc\"}}' > package.json"
+  - "echo '{\"compilerOptions\":{\"target\":\"ES2022\",\"module\":\"ESNext\",\"strict\":true,\"outDir\":\"dist\"}}' > tsconfig.json"
+  - "mkdir -p docs/dev"
+  - "printf '# Project Context\\n\\n## Tech Stack\\n\\n| Category | Value |\\n|----------|-------|\\n| Language | TypeScript |\\n| Framework | Express |\\n| Test | Vitest |\\n\\n## Test Framework\\n\\n| Item | Value |\\n|------|-------|\\n| Framework | Vitest |\\n| Command | npm test |\\n\\n## Project Structure\\n\\n```\\nsrc/\\n  routes/\\n  services/\\ntests/\\n```\\n\\n## Coding Conventions\\n\\ncamelCase variables, kebab-case files\\n' > docs/dev/context.md"
+
+# Layer 2: 構造契約（SKILL.mdから自動抽出）
+contracts:
+  - path: "docs/dev/plans/test-feature/plan.md"
+    exists: true
+    format: markdown
+    required_sections:
+      - "Requirements Summary"
+      - "Design Overview"
+      - "Task Dependency Graph"
+  - path: "docs/dev/plans/test-feature/tasks"
+    exists: true
+
+# Layer 3: 質的チェック（SKILL.mdのルール/禁止事項から自動生成）
+checks:
+  - "タスクファイルが001から連番で命名されている"
+  - "各タスクにテスト方針が具体的な振る舞いで記述されている（曖昧表現を避けている）"
+  - "インターフェース定義にanyやunknownが使われていない"
+  - "信号機マーカー（🔵🟡🔴のいずれか）が設計要素に付与されている"
+  - "context.mdの技術スタック（TypeScript, Express, Vitest）に沿った設計になっている"

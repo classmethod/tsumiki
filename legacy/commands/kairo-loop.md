@@ -10,7 +10,7 @@ argument-hint: "[要件名] [開始TASK-ID (TASK-00001)] [終了TASK-ID (TASK-00
 
 $0 の $1 から順番に実行してください。 $2 まで完了したら一旦終了して。
 以下の作業を実施してください
-- /tsumiki:kairo-implement を理解して、skillの内容に正確に従ってください
+- /tsumiki-legacy:kairo-implement を理解して、skillの内容に正確に従ってください
 - 実施する内容を全てtodoに詳細に記録してください。
 - 品質確認の段階で戻る処理をするときは以下の手順を組み込んでください
   - 品質の確認処理

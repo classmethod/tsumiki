@@ -30,7 +30,7 @@ Refactorフェーズファイル=./docs/implements/{要件名}/{{task_id}}/{feat
 
 1. **タスクノートの読み込み（唯一のコンテキストソース）**
    - `./docs/implements/{要件名}/{{task_id}}/note.md` を読み込み
-   - 存在しない場合: @task で `/tsumiki:tdd-tasknote {要件名} {{task_id}}` を実行して生成
+   - 存在しない場合: @task で `/tsumiki-legacy:tdd-tasknote {要件名} {{task_id}}` を実行して生成
    - note.mdには技術スタック、開発ルール、関連実装、設計文書、テスト関連情報、注意事項が集約済み
 
 2. **直前フェーズの出力を読み込み**
@@ -183,7 +183,7 @@ Refactorフェーズファイル=./docs/implements/{要件名}/{{task_id}}/{feat
   - コード品質: 適切なレベルに向上
 
 - **次のステップ表示**: 判定結果に関わらず、次のお勧めコマンドを表示
-  - 「次のお勧めステップ: `/tsumiki:tdd-verify-complete` で完全性検証を実行します。」
+  - 「次のお勧めステップ: `/tsumiki-legacy:tdd-verify-complete` で完全性検証を実行します。」
 
 # rules
 

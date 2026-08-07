@@ -11,7 +11,17 @@ Claude Code Pluginを使用してTsumikiをインストールします：
 /plugin install tsumiki@tsumiki
 ```
 
-**注意**: コマンドは `/tsumiki:` プレフィックス付きで実行します（例：`/tsumiki:kairo-requirements`）。
+**注意**: コマンドは `/tsumiki:` プレフィックス付きで実行します（例：`/tsumiki:dev-plan`）。
+
+#### レガシープラグイン（オプトイン）
+
+`Kairo` / `TDD` / `DIRECT` の従来コマンドは、オプトインのレガシープラグイン `tsumiki-legacy` として分離されています。利用する場合は追加でインストールしてください：
+
+```bash
+/plugin install tsumiki-legacy@tsumiki
+```
+
+**注意**: レガシーコマンドは `/tsumiki-legacy:` プレフィックス付きで実行します（例：`/tsumiki-legacy:kairo-requirements`）。本マニュアルの Kairo / TDD / DIRECT セクションのコマンドがこれに該当します。
 
 #### プロジェクト固有のルール設定
 
@@ -47,12 +57,14 @@ claude_docker/ ディレクトリを参考に構築してください（plugin�
 
 ### Kairoコマンド（包括的フロー）
 
+> **Legacy**: `init-tech-stack` / `kairo-requirements` / `kairo-design` / `kairo-tasks` / `kairo-loop` / `kairo-implement`（Skills版）はいずれもオプトインの `tsumiki-legacy` プラグインに含まれ、`/tsumiki-legacy:` プレフィックスで実行します。
+
 #### 1. 技術スタック初期化
 
 プロジェクトの技術スタック（フレームワーク、ライブラリ）を初期化します：
 
 ```
-/tsumiki:init-tech-stack
+/tsumiki-legacy:init-tech-stack
 ```
 
 init-tech-stack は以下を生成します：
@@ -64,7 +76,7 @@ init-tech-stack は以下を生成します：
 最初に、プロジェクトの要件概要をKairoに伝えます：
 
 ```
-/tsumiki:kairo-requirements 要件概要
+/tsumiki-legacy:kairo-requirements 要件概要
 
 # プロンプト例：
 # "ECサイトの商品レビュー機能を実装したい。
@@ -85,7 +97,7 @@ Kairoは以下を生成します：
 要件を確認・修正した後、設計を依頼します：
 
 ```
-/tsumiki:kairo-design（または省略可能）
+/tsumiki-legacy:kairo-design（または省略可能）
 
 # 要件を承認済みであることを伝えてください
 ```
@@ -104,12 +116,12 @@ Kairoは以下を生成します：
 設計を確認した後（承認は省略可）、タスク分割を実行します：
 
 ```
-/tsumiki:kairo-tasks
+/tsumiki-legacy:kairo-tasks
 
 # 設計を承認したことを伝えてください（または省略可能）
 ```
 
-タスク内容の確認用に `/tsumiki:kairo-task-verify` を実行することをお勧めします。
+タスク内容の確認用に `/tsumiki-legacy:kairo-task-verify` を実行することをお勧めします。
 
 Kairoは以下を生成します：
 - 依存関係を考慮したタスク一覧
@@ -124,13 +136,13 @@ Kairoは以下を生成します：
 
 ```
 # 全タスクを順番に実装
-/tsumiki:kairo-implement
+/tsumiki-legacy:kairo-implement
 
 # 特定のタスクのみ実装
-/tsumiki:kairo-implement  タスクファイル名　TASK番号
+/tsumiki-legacy:kairo-implement  タスクファイル名　TASK番号
 
 # タスク範囲を指定して実装 タスクディレクトリ名　開始TASK番号 終了TASK番号
-/tsumiki:kairo-loop
+/tsumiki-legacy:kairo-loop
 （実行中にcompactが発動しても安定して「長時間処理」が可能です）
 ```
 
@@ -147,7 +159,7 @@ Kairoは各タスクに対して内部的にTDDコマンドを使用して以下
 Skills版のkairo-implementは、Claude Codeのタスクシステムと連携した高度な実装スキルです。
 
 ```
-/tsumiki:kairo-implement [要件名] [TASK-ID] [--hil]
+/tsumiki-legacy:kairo-implement [要件名] [TASK-ID] [--hil]
 ```
 
 **特徴**:
@@ -162,38 +174,42 @@ Skills版のkairo-implementは、Claude Codeのタスクシステムと連携し
 
 ### TDDコマンド
 
+> **Legacy**: TDDコマンドはオプトインの `tsumiki-legacy` プラグインに含まれ、`/tsumiki-legacy:` プレフィックスで実行します。
+
 TASK作成時に `TDD` と判定している場合で個別にTDDプロセスを実行したい場合は、以下のコマンドを順次実行できます：
 
 ```
 # TDD要件定義
-/tsumiki:tdd-requirements タスクファイル名　TASK番号
+/tsumiki-legacy:tdd-requirements タスクファイル名　TASK番号
 
 # テストケース作成
-/tsumiki:tdd-testcases タスクファイル名　TASK番号
+/tsumiki-legacy:tdd-testcases タスクファイル名　TASK番号
 
 # テスト実装（Red）
-/tsumiki:tdd-red タスクファイル名　TASK番号
+/tsumiki-legacy:tdd-red タスクファイル名　TASK番号
 
 # 最小実装（Green）
-/tsumiki:tdd-green タスクファイル名　TASK番号
+/tsumiki-legacy:tdd-green タスクファイル名　TASK番号
 
 # リファクタリング
-/tsumiki:tdd-refactor タスクファイル名　TASK番号
+/tsumiki-legacy:tdd-refactor タスクファイル名　TASK番号
 
 # TDD完了確認
-/tsumiki:tdd-verify-complete タスクファイル名　TASK番号
+/tsumiki-legacy:tdd-verify-complete タスクファイル名　TASK番号
 ```
 
 ### DIRECTコマンド
+
+> **Legacy**: DIRECTコマンドはオプトインの `tsumiki-legacy` プラグインに含まれ、`/tsumiki-legacy:` プレフィックスで実行します。
 
 TASK作成時に `DIRECT` と判定している場合は、以下のコマンドを順次実行できます：
 
 ```
 # DIRECT準備
-/tsumiki:direct-setup タスクファイル名　TASK番号
+/tsumiki-legacy:direct-setup タスクファイル名　TASK番号
 
 # DIRECT検証
-/tsumiki:direct-verify タスクファイル名　TASK番号
+/tsumiki-legacy:direct-verify タスクファイル名　TASK番号
 ```
 
 ### リバースエンジニアリングコマンド
@@ -395,6 +411,68 @@ tsumikiの利用可能なコマンド一覧の表示、個別コマンドの詳�
 /tsumiki:timeout-fix
 ```
 
+#### その他のコマンド
+
+| コマンド | 説明 |
+|---------|------|
+| `adr-rubber-duck` | ADR（Architecture Decision Record）の壁打ち相手。ヒアリングで背景・制約・選択肢・トレードオフを深掘りし、ADRドラフトを作成 |
+| `task-exec` | やりたいことを受け取り、詳細計画 → 計画のチェック → 実施 → 実施結果の確認まで一貫して実行 |
+
+```
+# ADRの壁打ち（引数は任意。ざっくりでOK）
+/tsumiki:adr-rubber-duck 認証方式をJWTにするか検討したい
+
+# タスクの実施
+/tsumiki:task-exec 商品検索APIにページネーションを追加
+```
+
+**adr-rubber-duck**は `AskUserQuestion` を主体としたヒアリングを繰り返し（最大15イテレーション）、必要に応じてコードベース調査・Web調査で選択肢の裏付けを取ります。既存ADRをスキャンして番号を自動採番し、今回の決定で置き換わる既存ADRの有無も確認します。出力は常に「ドラフト」ステータスで、署名・ステータス変更・push はユーザーが行います。
+
+- 生成されるファイル: `docs/adr/{4桁連番}-{英語スラッグ}.md`（ADRドラフト）、`docs/adr/.sessions/{timestamp}_{スラッグ}.md`（壁打ちセッションログ）
+
+**task-exec**は計画と結果確認をメインで行い、それ以外の作業をサブエージェントに委譲します。コーディングは必ずサブエージェントによるTDDで実施し、作業は git worktree 上で行って完了時にマージします。不明点は `AskUserQuestion` で解消してから進めます。
+
+### 汎用スキル
+
+| スキル | 説明 |
+|-------|------|
+| `task-breakdown` | 依頼をゴール/制約/前提に正規化し、トップダウンで構造分解してタスク分割結果（ツリー＋表）を生成 |
+| `uat-test-design` | リポジトリを探索し、UAT（業務受入）・受入試験（システム受入）・非機能受入の試験項目一覧をL1/L2/L3の3階層で生成 |
+
+#### task-breakdown
+
+分野（開発・企画・運用など）を問わない汎用のタスク分割スキルです。「ゴール正規化 → 構造分解（1階層1軸）→ 粒度の停止条件 → 分割検証」の4フェーズで進め、MECE・依存関係・DoD・粒度の4観点で分割結果自体を検証します。
+
+```
+# 依頼を直接渡す
+/tsumiki:task-breakdown "社内向け勤怠管理システムの移行"
+
+# 要件ファイルを渡す
+/tsumiki:task-breakdown docs/spec/attendance-requirements.md
+```
+
+- **standalone モード**: ユーザーが直接呼び出した場合。結果を提示した上で、保存先を `AskUserQuestion` で確認してファイル保存します
+- **embedded モード**: 他のスキル/コマンドから分解目的で呼ばれた場合。ファイル保存せず、結果を呼び出し元に返却します
+- 各判断には確信度（🔵 明示指示 / 🟡 妥当な推測 / 🔴 要確認）が付与され、🔴 は確認またはエスカレーションされます
+
+#### uat-test-design
+
+巨大プロジェクトにも対応できるよう、親エージェントは試験項目の本文を読まず、抽出処理を機能グループ単位でサブエージェントへ並列委譲する構成になっています。既存の仕様書・E2Eテスト・単体テストを名寄せし、自動テストでカバー済みの項目を UAT 本体から分離することで件数の肥大を防ぎます。
+
+```
+/tsumiki:uat-test-design
+```
+
+実行の流れ:
+
+1. **インベントリ** — リポジトリを実測して情報源をマップ化。追加資料・実施環境・方針・出力先を `AskUserQuestion` で確認
+2. **分類** — 機能グループを導出し、仕様/E2E/単体テスト/画面の名寄せ表とIDレンジを作成
+3. **抽出** — グループ担当サブエージェントを並列起動してL2項目を抽出、別途L3（非機能）とL1（End-to-Endシナリオ）を生成
+4. **統合・レビュー** — index生成、独立レビューエージェントによる検証、件数妥当性チェック
+
+- 生成されるファイル: `docs/uat/{yyyymmdd}/` 配下に `index.md` / `L1-scenarios.md` / `L2-{グループ}.md` / `L2-{グループ}-covered.md`（自動テストカバー済み）/ `L3-nonfunctional.md` / `gaps.md` / `_inventory.md` / `_group-map.md`
+- 出力形式は Markdown が既定。xlsx の追加出力も選択できます
+
 ### セキュリティチェックスキル
 
 #### ipa-security-check
@@ -490,6 +568,10 @@ IPA（情報処理推進機構）が公開する以下5つの公式資料に基�
 │   │   └── {要件名}/
 │   ├── tasks/             # タスク一覧
 │   │   └── {要件名}/
+│   ├── adr/               # ADR（adr-rubber-duck出力）
+│   │   └── .sessions/     # 壁打ちセッションログ
+│   ├── uat/               # UAT試験項目（uat-test-design出力）
+│   │   └── {yyyymmdd}/
 │   └── dev/               # Dev Skills出力
 │       ├── context.md     # プロジェクトコンテキスト
 │       └── plans/         # 実装計画
@@ -503,15 +585,15 @@ IPA（情報処理推進機構）が公開する以下5つの公式資料に基�
 
 ```mermaid
 flowchart TD
-    A[要件概要を伝える] --> B[tsumiki:kairo-requirements]
+    A[要件概要を伝える] --> B[tsumiki-legacy:kairo-requirements]
     B --> C{要件を確認}
     C -->|修正必要| B
-    C -->|OK| D[tsumiki:kairo-design]
+    C -->|OK| D[tsumiki-legacy:kairo-design]
     D --> E{設計を確認}
     E -->|修正必要| D
-    E -->|OK| F[tsumiki:kairo-tasks]
+    E -->|OK| F[tsumiki-legacy:kairo-tasks]
     F --> G{タスクを確認}
-    G -->|OK| H[tsumiki:kairo-implement]
+    G -->|OK| H[tsumiki-legacy:kairo-implement]
     H --> I{全タスク完了?}
     I -->|No| H
     I -->|Yes| J[プロジェクト完了]
